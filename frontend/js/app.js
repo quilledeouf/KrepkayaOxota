@@ -1,10 +1,5 @@
-/*
- * app.js — состояние приложения и UI-логика главной страницы (карта).
- * Связывает переключатели (режим/сезон), поиск, карту и боковую панель.
- * Данные получает только через Api, карту — через MapView.
- */
+
 (() => {
-  // ── Глобальное состояние (см. docs/ARCHITECTURE.md §3) ───
   const state = {
     mode: 'hunting', // F2: 'hunting' | 'fishing'
     season: Api.currentSeasonCode(), // F4: текущий сезон по дате
@@ -12,7 +7,7 @@
     speciesFilter: null, // F5: id вида или null
   };
 
-  // ── Ссылки на элементы ───────────────────────────────────
+  
   const el = {};
   const $ = (id) => document.getElementById(id);
 
@@ -35,7 +30,6 @@
     renderEmptyPanel();
   }
 
-  // ── Построение контролов ─────────────────────────────────
   async function buildSeasonSelect() {
     const seasons = await Api.getSeasons();
     el.seasonSelect.innerHTML = seasons
@@ -52,9 +46,7 @@
     el.speciesFilter.value = state.speciesFilter || '';
   }
 
-  // ── Обработчики ──────────────────────────────────────────
   function bindControls() {
-    // F2 — режим охота/рыбалка
     el.modeBtns.forEach((btn) =>
       btn.addEventListener('click', async () => {
         state.mode = btn.dataset.mode;
@@ -66,17 +58,14 @@
       })
     );
 
-    // F4 — сезон
     el.seasonSelect.addEventListener('change', () => {
       state.season = el.seasonSelect.value;
       applySpeciesFilter();
       if (state.selectedRegionId) refreshPanel();
     });
 
-    // F7 — поиск региона
     el.search.addEventListener('input', onSearch);
 
-    // F5 — фильтр по виду
     el.speciesFilter.addEventListener('change', () => {
       state.speciesFilter = el.speciesFilter.value || null;
       applySpeciesFilter();
@@ -88,7 +77,6 @@
     });
   }
 
-  // ── Поиск (F7) ───────────────────────────────────────────
   async function onSearch() {
     const results = await Api.searchRegions(el.search.value);
     if (!el.search.value.trim()) {
@@ -96,7 +84,6 @@
       return;
     }
     if (results.length === 0) {
-      // Ветка ошибки из User Flow: ничего не найдено
       el.searchResults.innerHTML =
         '<li class="muted">Ничего не найдено. Выберите регион на карте.</li>';
       return;
@@ -115,7 +102,6 @@
     );
   }
 
-  // ── Фильтр по виду (F5) ──────────────────────────────────
   async function applySpeciesFilter() {
     if (!state.speciesFilter) {
       MapView.highlightRegions([]);
@@ -125,7 +111,6 @@
     MapView.highlightRegions(ids);
   }
 
-  // ── Боковая панель: карточка региona (F3) ────────────────
   function onRegionSelected(regionId) {
     state.selectedRegionId = regionId;
     refreshPanel();
@@ -139,7 +124,6 @@
       });
       renderPanel(data);
     } catch (err) {
-      // Ветка ошибки из User Flow: нет данных по региону
       el.panel.innerHTML = `<div class="panel-empty">Данные по региону уточняются.</div>`;
     }
   }
@@ -149,7 +133,6 @@
     const seasonTitle = el.seasonSelect.options[el.seasonSelect.selectedIndex].text;
 
     if (!data.species.length) {
-      // Ветка ошибки из User Flow: в этом сезоне ничего не доступно
       el.panel.innerHTML = `
         <h2>${data.region.name}</h2>
         <div class="badges"><span class="badge">${modeTitle}</span><span class="badge">${seasonTitle}</span></div>
