@@ -38,56 +38,40 @@ window.APP_DATA = {
   ],
 
   // Доступность: что × где × когда (F3). seasonId: 1 весна,2 лето,3 осень,4 зима
+  // Scope прототипа — только регион Ростов-на-Дону (regionId: 1).
   availability: [
-    { regionId: 1, speciesId: 10, seasonId: 3, isAllowed: true, dateFrom: '2026-10-01', dateTo: '2026-12-31', restriction: 'по путёвке' },
+    // ── Охота (дичь) ──
+    { regionId: 1, speciesId: 13, seasonId: 1, isAllowed: false, dateFrom: null, dateTo: null, restriction: 'весенний запрет' },
+    { regionId: 1, speciesId: 10, seasonId: 2, isAllowed: true, dateFrom: '2026-06-01', dateTo: '2026-08-31', restriction: 'по путёвке, ограниченно' },
     { regionId: 1, speciesId: 13, seasonId: 3, isAllowed: true, dateFrom: '2026-09-01', dateTo: '2026-11-30', restriction: 'нормы добычи' },
+    { regionId: 1, speciesId: 14, seasonId: 3, isAllowed: true, dateFrom: '2026-10-01', dateTo: '2026-12-31', restriction: null },
+    { regionId: 1, speciesId: 10, seasonId: 3, isAllowed: true, dateFrom: '2026-10-01', dateTo: '2026-12-31', restriction: 'по путёвке' },
+    { regionId: 1, speciesId: 12, seasonId: 3, isAllowed: true, dateFrom: '2026-10-01', dateTo: '2026-12-31', restriction: 'по лицензии' },
+    { regionId: 1, speciesId: 11, seasonId: 4, isAllowed: true, dateFrom: '2026-11-01', dateTo: '2027-01-15', restriction: null },
+    { regionId: 1, speciesId: 10, seasonId: 4, isAllowed: true, dateFrom: '2026-11-01', dateTo: '2026-12-31', restriction: 'по путёвке' },
+    // ── Рыбалка (рыба) ──
+    { regionId: 1, speciesId: 24, seasonId: 1, isAllowed: true, dateFrom: '2026-03-01', dateTo: '2026-03-31', restriction: 'до начала нереста' },
     { regionId: 1, speciesId: 20, seasonId: 1, isAllowed: false, dateFrom: null, dateTo: null, restriction: 'нерестовый запрет' },
+    { regionId: 1, speciesId: 23, seasonId: 1, isAllowed: false, dateFrom: null, dateTo: null, restriction: 'нерестовый запрет' },
+    { regionId: 1, speciesId: 22, seasonId: 2, isAllowed: true, dateFrom: '2026-06-16', dateTo: '2026-08-31', restriction: 'суточная норма' },
+    { regionId: 1, speciesId: 21, seasonId: 2, isAllowed: true, dateFrom: '2026-06-16', dateTo: '2026-08-31', restriction: null },
+    { regionId: 1, speciesId: 20, seasonId: 2, isAllowed: true, dateFrom: '2026-06-16', dateTo: '2026-08-31', restriction: 'суточная норма' },
     { regionId: 1, speciesId: 20, seasonId: 3, isAllowed: true, dateFrom: '2026-09-01', dateTo: '2026-11-30', restriction: 'суточная норма' },
-    { regionId: 2, speciesId: 11, seasonId: 4, isAllowed: true, dateFrom: '2026-11-01', dateTo: '2027-01-15', restriction: null },
-    { regionId: 2, speciesId: 12, seasonId: 3, isAllowed: true, dateFrom: '2026-10-01', dateTo: '2026-12-31', restriction: 'по лицензии' },
-    { regionId: 3, speciesId: 22, seasonId: 2, isAllowed: true, dateFrom: '2026-06-16', dateTo: '2026-08-31', restriction: 'суточная норма' },
-    { regionId: 3, speciesId: 21, seasonId: 3, isAllowed: true, dateFrom: '2026-09-01', dateTo: '2026-11-30', restriction: null },
-    { regionId: 3, speciesId: 23, seasonId: 1, isAllowed: false, dateFrom: null, dateTo: null, restriction: 'нерестовый запрет' },
-    { regionId: 4, speciesId: 10, seasonId: 3, isAllowed: true, dateFrom: '2026-10-01', dateTo: '2026-12-31', restriction: 'по путёвке' },
-    { regionId: 4, speciesId: 14, seasonId: 3, isAllowed: true, dateFrom: '2026-10-01', dateTo: '2026-12-31', restriction: null },
-    { regionId: 5, speciesId: 11, seasonId: 4, isAllowed: true, dateFrom: '2026-11-01', dateTo: '2027-01-15', restriction: null },
-    { regionId: 6, speciesId: 24, seasonId: 1, isAllowed: true, dateFrom: '2026-03-01', dateTo: '2026-04-30', restriction: 'до начала нереста' },
-    { regionId: 6, speciesId: 20, seasonId: 3, isAllowed: true, dateFrom: '2026-09-01', dateTo: '2026-11-30', restriction: 'суточная норма' },
+    { regionId: 1, speciesId: 21, seasonId: 3, isAllowed: true, dateFrom: '2026-09-01', dateTo: '2026-11-30', restriction: null },
+    { regionId: 1, speciesId: 23, seasonId: 3, isAllowed: true, dateFrom: '2026-09-01', dateTo: '2026-11-30', restriction: null },
+    { regionId: 1, speciesId: 21, seasonId: 4, isAllowed: true, dateFrom: '2026-12-01', dateTo: '2027-02-28', restriction: 'зимняя ловля' },
+    { regionId: 1, speciesId: 20, seasonId: 4, isAllowed: true, dateFrom: '2026-12-01', dateTo: '2027-02-28', restriction: 'суточная норма' },
   ],
 
-  // Регионы Ростовской обл. в формате GeoJSON (границы упрощены для прототипа, F1)
+  // Регион в формате GeoJSON (F1). Scope прототипа — только Ростов-на-Дону;
+  // остальные регионы Ростовской обл. добавляются позже (вне scope, см. README).
   regions: {
     type: 'FeatureCollection',
     features: [
       {
         type: 'Feature',
-        properties: { id: 1, name: 'Азовский район', groundType: 'общедоступное' },
-        geometry: { type: 'Polygon', coordinates: [[[39.05, 46.95], [39.55, 46.95], [39.55, 47.25], [39.05, 47.25], [39.05, 46.95]]] },
-      },
-      {
-        type: 'Feature',
-        properties: { id: 2, name: 'Сальский район', groundType: 'закреплённое' },
-        geometry: { type: 'Polygon', coordinates: [[[41.2, 46.25], [41.85, 46.25], [41.85, 46.7], [41.2, 46.7], [41.2, 46.25]]] },
-      },
-      {
-        type: 'Feature',
-        properties: { id: 3, name: 'Цимлянский район', groundType: 'общедоступное' },
-        geometry: { type: 'Polygon', coordinates: [[[42.0, 47.5], [42.7, 47.5], [42.7, 47.9], [42.0, 47.9], [42.0, 47.5]]] },
-      },
-      {
-        type: 'Feature',
-        properties: { id: 4, name: 'Шолоховский район', groundType: 'общедоступное' },
-        geometry: { type: 'Polygon', coordinates: [[[41.4, 49.4], [42.3, 49.4], [42.3, 49.85], [41.4, 49.85], [41.4, 49.4]]] },
-      },
-      {
-        type: 'Feature',
-        properties: { id: 5, name: 'Морозовский район', groundType: 'закреплённое' },
-        geometry: { type: 'Polygon', coordinates: [[[41.6, 48.15], [42.4, 48.15], [42.4, 48.55], [41.6, 48.55], [41.6, 48.15]]] },
-      },
-      {
-        type: 'Feature',
-        properties: { id: 6, name: 'Неклиновский район', groundType: 'общедоступное' },
-        geometry: { type: 'Polygon', coordinates: [[[38.35, 47.05], [38.95, 47.05], [38.95, 47.35], [38.35, 47.35], [38.35, 47.05]]] },
+        properties: { id: 1, name: 'Ростов-на-Дону', groundType: 'общедоступное' },
+        geometry: { type: 'Polygon', coordinates: [[[39.45, 47.05], [40.0, 47.05], [40.0, 47.4], [39.45, 47.4], [39.45, 47.05]]] },
       },
     ],
   },

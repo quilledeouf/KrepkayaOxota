@@ -20,7 +20,7 @@ const MapView = (() => {
   async function init(containerId, clickHandler) {
     onRegionClick = clickHandler;
 
-    map = L.map(containerId, { zoomControl: true }).setView([47.6, 41.0], 7);
+    map = L.map(containerId, { zoomControl: true }).setView([47.22, 39.72], 10);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© OpenStreetMap',
