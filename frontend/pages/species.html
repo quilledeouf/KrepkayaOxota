@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Крепкая Охота — виды</title>
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a class="logo" href="../index.html">🦌 Крепкая&nbsp;Охота</a>
+    <nav class="site-nav">
+      <a href="../index.html">Карта</a>
+      <a href="species.html" class="active">Виды</a>
+      <a href="favorites.html">Избранное</a>
+      <a href="about.html">О проекте</a>
+    </nav>
+  </header>
+
+  <main class="page">
+    <h1>Каталог видов</h1>
+    <p>Дичь и рыба Ростовской области. Фильтр по режиму (F5, F6).</p>
+
+    <div class="filter-bar">
+      <button data-mode="" class="active">Все</button>
+      <button data-mode="hunting">🏹 Дичь</button>
+      <button data-mode="fishing">🎣 Рыба</button>
+    </div>
+
+    <div id="cards" class="card-grid"></div>
+  </main>
+
+  <footer class="site-footer">Учебная практика · «Крепкая Охота» · прототип дня 2.</footer>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/api.js"></script>
+  <script>
+    // Простой каталог: рендерим карточки видов через тот же слой Api.
+    const cards = document.getElementById('cards');
+    const buttons = document.querySelectorAll('[data-mode]');
+
+    async function render(mode) {
+      const list = await Api.getAllSpecies(mode ? { mode } : {});
+      cards.innerHTML = list
+        .map(
+          (s) => `
+        <article class="species-card">
+          <div class="emoji">${s.emoji || '•'}</div>
+          <h3>${s.name}</h3>
+          <div class="latin">${s.latinName || ''}</div>
+          <p>${s.description || ''}</p>
+        </article>`
+        )
+        .join('');
+    }
+
+    buttons.forEach((b) =>
+      b.addEventListener('click', () => {
+        buttons.forEach((x) => x.classList.toggle('active', x === b));
+        render(b.dataset.mode);
+      })
+    );
+
+    render('');
+  </script>
+</body>
+</html>
