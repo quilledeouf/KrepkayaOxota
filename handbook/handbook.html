@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Крепкая Охота - Справочник</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">
+                <img src="logo.jpg" alt="Крепкая Охота" class="logo-icon">
+                <span class="logo-text">Крепкая Охота</span>
+            </div>
+            <nav class="nav">
+                <a href="#" class="nav-link">Главная</a>
+                <a href="#" class="nav-link">Карта</a>
+                <a href="#" class="nav-link active">Справочник</a>
+                <a href="#" class="nav-link">Законы</a>
+                <a href="#" class="nav-link">Гиды</a>
+            </nav>
+            <div class="header-icons">
+                <div class="icon-circle"></div>
+                <div class="icon-circle"></div>
+                <div class="icon-circle"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="content-wrapper" id="contentWrapper" data-theme="fish">
+            <div class="page-header">
+                <h1 class="page-title">Справочник</h1>
+                <p class="page-subtitle">Все о рыбах и животных Ростовской области</p>
+            </div>
+
+            <!-- Tabs -->
+            <div class="tabs">
+                <button class="tab-btn active" onclick="switchTab('fish', this)">Рыбы</button>
+                <button class="tab-btn" onclick="switchTab('animals', this)">Животные</button>
+                <button class="tab-btn" onclick="switchTab('birds', this)">Птицы</button>
+            </div>
+
+            <!-- Season Legend -->
+            <div class="season-legend">
+                <div class="legend-item">
+                    <div class="legend-bar allowed"></div>
+                    <span>Разрешено</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-bar limited"></div>
+                    <span>Ограничено</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-bar restricted"></div>
+                    <span>Запрещено</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-bar redbook"></div>
+                    <span>Красная книга</span>
+                </div>
+            </div>
+
+            <!-- Fish Tab Content -->
+            <div class="tab-content active" id="fish">
+                <div class="cards-grid">
+                    
+                    <!-- Pike -->
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="https://i.pinimg.com/1200x/0f/34/e0/0f34e0a0eaebf9fa7829a4436ea0fb2a.jpg" alt="Щука">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Щука</h3>
+                            <p class="card-description">
+                                Хищная пресноводная рыба. Обитает в заросших заводях и омутах. 
+                                Активна утром и вечером.
+                            </p>
+                            <div class="card-weight">до 35 кг</div>
+                            <div class="card-bars">
+                                <div class="bar season-allowed" title="Разрешено"></div>
+                                <div class="bar season-limited" title="Ограничено"></div>
+                                <div class="bar season-allowed" title="Разрешено"></div>
+                                <div class="bar season-restricted" title="Запрещено"></div>
+                                <div class="bar season-allowed" title="Разрешено"></div>
+                            </div>
+                            <div class="season-labels">
+                                <span>Весна</span>
+                                <span>Лето</span>
+                                <span>Осень</span>
+                                <span>Зима</span>
+                                <span>Круглый год</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Catfish -->
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="https://i.pinimg.com/1200x/5e/bc/8b/5ebc8b29a94b5ae6b64ce3d045ecd387.jpg" alt="Сом">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Сом</h3>
+                            <p class="card-description">
+                                Крупный хищник реки Дон, достигает длины до 3 метров, 
+                                ведёт донный образ жизни
+                            </p>
+                            <div class="card-weight highlighted">до 200+ кг</div>
+                            <div class="card-bars">
+                                <div class="bar season-restricted" title="Запрещено"></div>
+                                <div class="bar season-allowed" title="Разрешено"></div>
+                                <div class="bar season-allowed" title="Разрешено"></div>
+                                <div class="bar season-limited" title="Ограничено"></div>
+                                <div class="bar season-restricted" title="Запрещено"></div>
+                            </div>
+                            <div class="season-labels">
+                                <span>Весна</span>
+                                <span>Лето</span>
+                                <span>Осень</span>
+                                <span>Зима</span>
+                                <span>Круглый год</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Perch -->
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="https://i.pinimg.com/1200x/bb/d9/e1/bbd9e18b54cdb3dfee9ee70feccb2535.jpg" alt="Окунь">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Окунь</h3>
+                            <p class="card-description">
+                                Хищная рыба с характерными полосами. Держится стаями. 
+                                Любит чистую воду с растительностью.
+                            </p>
+                            <div class="card-weight">до 4 кг</div>
+                            <div class="card-bars">
+                                <div class="bar season-allowed" title="Разрешено"></div>
+                                <div class="bar season-allowed" title="Разрешено"></div>
+                                <div class="bar season-allowed" title="Разрешено"></div>
+                                <div class="bar season-allowed" title="Разрешено"></div>
+                                <div class="bar season-allowed" title="Разрешено"></div>
+                            </div>
+                            <div class="season-labels">
+                                <span>Весна</span>
+                                <span>Лето</span>
+                                <span>Осень</span>
+                                <span>Зима</span>
+                                <span>Круглый год</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Carp -->
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="https://i.pinimg.com/1200x/7d/79/82/7d7982efaa407018bb6662946c15dbad.jpg" alt="Карп">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Карп</h3>
+                            <p class="card-description">
+                                Крупная мирная рыба. Обитает в реках и водохранилищах. 
+                                Популярный объект спортивной рыбалки.
+                            </p>
+                            <div class="card-weight">до 20 кг</div>
+                            <div class="card-bars">
+                                <div class="bar season-limited" title="Ограничено"></div>
+                                <div class="bar season-allowed" title="Разрешено"></div>
+                                <div class="bar season-allowed" title="Разрешено"></div>
+                                <div class="bar season-limited" title="Ограничено"></div>
+                                <div class="bar season-restricted" title="Запрещено"></div>
+                            </div>
+                            <div class="season-labels">
+                                <span>Весна</span>
+                                <span>Лето</span>
+                                <span>Осень</span>
+                                <span>Зима</span>
+                                <span>Круглый год</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bream -->
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="https://i.pinimg.com/736x/32/d9/41/32d941b264364fc11839e99ff5512a08.jpg" alt="Лещ">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Лещ</h3>
+                            <p class="card-description">
+                                Мирная рыба семейства карповых. Обитает в глубоких ямах 
+                                с илистым дном.
+                            </p>
+                            <div class="card-weight">до 8 кг</div>
+                            <div class="card-bars">
+                                <div class="bar season-limited" title="Ограничено"></div>
+                                <div class="bar season-allowed" title="Разрешено"></div>
+                                <div class="bar season-allowed" title="Разрешено"></div>
+                                <div class="bar season-limited" title="Ограничено"></div>
+                                <div class="bar season-restricted" title="Запрещено"></div>
+                            </div>
+                            <div class="season-labels">
+                                <span>Весна</span>
+                                <span>Лето</span>
+                                <span>Осень</span>
+                                <span>Зима</span>
+                                <span>Круглый год</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Zander -->
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="https://i.pinimg.com/736x/96/b7/29/96b72917d82fa40ffd270296ae1dde52.jpg" alt="Судак">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Судак</h3>
+                            <p class="card-description">
+                                Ценная хищная рыба. Предпочитает глубокие места с 
+                                чистой водой и песчаным дном.
+                            </p>
+                            <div class="card-weight">до 15 кг</div>
+                            <div class="card-bars">
+                                <div class="bar season-allowed" title="Разрешено"></div>
+                                <div class="bar season-restricted" title="Запрещено"></div>
+                                <div class="bar season-allowed" title="Разрешено"></div>
+                                <div class="bar season-limited" title="Ограничено"></div>
+                                <div class="bar season-allowed" title="Разрешено"></div>
+                            </div>
+                            <div class="season-labels">
+                                <span>Весна</span>
+                                <span>Лето</span>
+                                <span>Осень</span>
+                                <span>Зима</span>
+                                <span>Круглый год</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Crucian Carp -->
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="https://i.pinimg.com/736x/a7/85/32/a7853293cdaa23443030438038089994.jpg" alt="Карась">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Карась</h3>
+                            <p class="card-description">
+                                Неприхотливая мирная рыба. Обитает в стоячих водоёмах 
+                                с илистым дном.
+                            </p>
+                            <div class="card-weight">до 3 кг</div>
+                            <div class="card-bars">
+                                <div class="bar season-limited" title="Ограничено"></div>
+                                <div class="bar season-allowed" title="Разрешено"></div>
+                                <div class="bar season-allowed" title="Разрешено"></div>
+                                <div class="bar season-limited" title="Ограничено"></div>
+                                <div class="bar season-restricted" title="Запрещено"></div>
+                            </div>
+                            <div class="season-labels">
+                                <span>Весна</span>
+                                <span>Лето</span>
+                                <span>Осень</span>
+                                <span>Зима</span>
+                                <span>Круглый год</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Roach -->
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="https://i.pinimg.com/1200x/d9/81/42/d9814276139c892ae4269cf37655ae0a.jpg" alt="Плотва">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Плотва</h3>
+                            <p class="card-description">
+                                Массовая мирная рыба. Обитает в реках и озёрах. 
+                                Держится стаями.
+                            </p>
+                            <div class="card-weight">до 2 кг</div>
+                            <div class="card-bars">
+                                <div class="bar season-allowed" title="Разрешено"></div>
+                                <div class="bar season-allowed" title="Разрешено"></div>
+                                <div class="bar season-allowed" title="Разрешено"></div>
+                                <div class="bar season-limited" title="Ограничено"></div>
+                                <div class="bar season-allowed" title="Разрешено"></div>
+                            </div>
+                            <div class="season-labels">
+                                <span>Весна</span>
+                                <span>Лето</span>
+                                <span>Осень</span>
+                                <span>Зима</span>
+                                <span>Круглый год</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sterlet (Red Book) -->
+                    <div class="card redbook-card">
+                        <div class="redbook-badge">Красная книга</div>
+                        <div class="card-image">
+                            <img src="https://i.pinimg.com/1200x/e3/55/1d/e3551d0f0378615578827c6483b36be7.jpg" alt="Стерлядь">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Стерлядь</h3>
+                            <p class="card-description">
+                                Редкая осетровая рыба. Внесена в Красную книгу России. 
+                                Обитает в реке Дон.
+                            </p>
+                            <div class="card-weight">до 6 кг</div>
+                            <div class="card-bars">
+                                <div class="bar season-redbook" title="Красная книга"></div>
+                                <div class="bar season-redbook" title="Красная книга"></div>
+                                <div class="bar season-redbook" title="Красная книга"></div>
+                                <div class="bar season-redbook" title="Красная книга"></div>
+                                <div class="bar season-redbook" title="Красная книга"></div>
+                            </div>
+                            <div class="season-labels">
+                                <span>Весна</span>
+                                <span>Лето</span>
+                                <span>Осень</span>
+                                <span>Зима</span>
+                                <span>Круглый год</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Russian Sturgeon (Red Book) -->
+                    <div class="card redbook-card">
+                        <div class="redbook-badge">Красная книга</div>
+                        <div class="card-image">
+                            <img src="https://avatars.mds.yandex.net/i?id=507cca9a10bc291dd18f4267f16f2707_l-5250913-images-thumbs&n=13" alt="Русский осётр">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Русский осётр</h3>
+                            <p class="card-description">
+                                Ценная осетровая рыба. Внесена в Красную книгу. 
+                                Проходная рыба, заходит в Дон на нерест.
+                            </p>
+                            <div class="card-weight highlighted">до 40 кг</div>
+                            <div class="card-bars">
+                                <div class="bar season-redbook" title="Красная книга"></div>
+                                <div class="bar season-redbook" title="Красная книга"></div>
+                                <div class="bar season-redbook" title="Красная книга"></div>
+                                <div class="bar season-redbook" title="Красная книга"></div>
+                                <div class="bar season-redbook" title="Красная книга"></div>
+                            </div>
+                            <div class="season-labels">
+                                <span>Весна</span>
+                                <span>Лето</span>
+                                <span>Осень</span>
+                                <span>Зима</span>
+                                <span>Круглый год</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Animals Tab Content -->
+            <div class="tab-content" id="animals">
+                <div class="cards-grid">
+                    
+                    <!-- Wild Boar -->
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="https://i.pinimg.com/736x/f7/c7/65/f7c765fe33d59bc586f5437e3cf55351.jpg" alt="Кабан">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Кабан</h3>
+                            <p class="card-description">
+                                Дикое парнокопытное животное. Держится стадами. 
+                                Активен ночью. Обитает в смешанных лесах и поймах рек.
+                            </p>
+                            <div class="card-weight">до 200 кг</div>
+                            <div class="card-bars">
+                                <div class="bar season-restricted" title="Запрещено"></div>
+                                <div class="bar season-restricted" title="Запрещено"></div>
+                                <div class="bar season-allowed" title="Разрешено"></div>
+                                <div class="bar season-allowed" title="Разрешено"></div>
+                                <div class="bar season-allowed" title="Разрешено"></div>
+                            </div>
+                            <div class="season-labels">
+                                <span>Весна</span>
+                                <span>Лето</span>
+                                <span>Осень</span>
+                                <span>Зима</span>
+                                <span>Круглый год</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Fox -->
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="https://i.pinimg.com/1200x/97/b3/38/97b3389827c84f353682a35b259b42d5.jpg" alt="Лиса">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Лиса</h3>
+                            <p class="card-description">
+                                Хищное животное семейства псовых. Хитрая и осторожная. 
+                                Питается грызунами, зайцами, птицами.
+                            </p>
+                            <div class="card-weight">до 10 кг</div>
+                            <div class="card-bars">
+                                <div class="bar season-restricted" title="Запрещено"></div>
+                                <div class="bar season-restricted" title="Запрещено"></div>
+                                <div class="bar season-allowed" title="Разрешено"></div>
+                                <div class="bar season-allowed" title="Разрешено"></div>
+                                <div class="bar season-allowed" title="Разрешено"></div>
+                            </div>
+                            <div class="season-labels">
+                                <span>Весна</span>
+                                <span>Лето</span>
+                                <span>Осень</span>
+                                <span>Зима</span>
+                                <span>Круглый год</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hare -->
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="https://i.pinimg.com/736x/25/3b/2b/253b2b997c8df7733480e870a86fd0de.jpg" alt="Заяц">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Заяц-русак</h3>
+                            <p class="card-description">
+                                Быстрое травоядное животное. Ведёт ночной образ жизни. 
+                                Обитает в полях и лесостепной зоне.
+                            </p>
+                            <div class="card-weight">до 6 кг</div>
+                            <div class="card-bars">
+                                <div class="bar season-restricted" title="Запрещено"></div>
+                                <div class="bar season-restricted" title="Запрещено"></div>
+                                <div class="bar season-allowed" title="Разрешено"></div>
+                                <div class="bar season-allowed" title="Разрешено"></div>
+                                <div class="bar season-allowed" title="Разрешено"></div>
+                            </div>
+                            <div class="season-labels">
+                                <span>Весна</span>
+                                <span>Лето</span>
+                                <span>Осень</span>
+                                <span>Зима</span>
+                                <span>Круглый год</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Moose -->
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="https://i.pinimg.com/1200x/23/51/94/235194088ba92e88a1e28795f9e63784.jpg" alt="Лось">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Лось</h3>
+                            <p class="card-description">
+                                Крупное парнокопытное животное. Обитает в лесах 
+                                и лесостепной зоне. Питается побегами, корой.
+                            </p>
+                            <div class="card-weight highlighted">до 600 кг</div>
+                            <div class="card-bars">
+                                <div class="bar season-restricted" title="Запрещено"></div>
+                                <div class="bar season-restricted" title="Запрещено"></div>
+                                <div class="bar season-allowed" title="Разрешено"></div>
+                                <div class="bar season-limited" title="Ограничено"></div>
+                                <div class="bar season-restricted" title="Запрещено"></div>
+                            </div>
+                            <div class="season-labels">
+                                <span>Весна</span>
+                                <span>Лето</span>
+                                <span>Осень</span>
+                                <span>Зима</span>
+                                <span>Круглый год</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Wolf -->
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="https://i.pinimg.com/736x/f7/73/e8/f773e876f2efba4116e288896fb5d737.jpg" alt="Волк">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Волк</h3>
+                            <p class="card-description">
+                                Хищное животное, живёт стаями. Активен ночью. 
+                                Обитает в лесах и степях.
+                            </p>
+                            <div class="card-weight">до 60 кг</div>
+                            <div class="card-bars">
+                                <div class="bar season-restricted" title="Запрещено"></div>
+                                <div class="bar season-restricted" title="Запрещено"></div>
+                                <div class="bar season-allowed" title="Разрешено"></div>
+                                <div class="bar season-allowed" title="Разрешено"></div>
+                                <div class="bar season-allowed" title="Разрешено"></div>
+                            </div>
+                            <div class="season-labels">
+                                <span>Весна</span>
+                                <span>Лето</span>
+                                <span>Осень</span>
+                                <span>Зима</span>
+                                <span>Круглый год</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Deer -->
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="https://i.pinimg.com/1200x/0e/89/1a/0e891a2c484688899705ae2d7f181508.jpg" alt="Олень">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Благородный олень</h3>
+                            <p class="card-description">
+                                Грациозное парнокопытное. Обитает в лесах. 
+                                Питается травой, побегами и корой деревьев.
+                            </p>
+                            <div class="card-weight">до 300 кг</div>
+                            <div class="card-bars">
+                                <div class="bar season-restricted" title="Запрещено"></div>
+                                <div class="bar season-restricted" title="Запрещено"></div>
+                                <div class="bar season-allowed" title="Разрешено"></div>
+                                <div class="bar season-restricted" title="Запрещено"></div>
+                                <div class="bar season-restricted" title="Запрещено"></div>
+                            </div>
+                            <div class="season-labels">
+                                <span>Весна</span>
+                                <span>Лето</span>
+                                <span>Осень</span>
+                                <span>Зима</span>
+                                <span>Круглый год</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Badger -->
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="https://i.pinimg.com/736x/0b/69/f6/0b69f6ef42314a25b5a4ab3453984d3c.jpg" alt="Барсук">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Барсук</h3>
+                            <p class="card-description">
+                                Ночное всеядное животное. Живёт в норах. 
+                                Обитает в лесостепной зоне.
+                            </p>
+                            <div class="card-weight">до 20 кг</div>
+                            <div class="card-bars">
+                                <div class="bar season-restricted" title="Запрещено"></div>
+                                <div class="bar season-restricted" title="Запрещено"></div>
+                                <div class="bar season-allowed" title="Разрешено"></div>
+                                <div class="bar season-allowed" title="Разрешено"></div>
+                                <div class="bar season-restricted" title="Запрещено"></div>
+                            </div>
+                            <div class="season-labels">
+                                <span>Весна</span>
+                                <span>Лето</span>
+                                <span>Осень</span>
+                                <span>Зима</span>
+                                <span>Круглый год</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Raccoon Dog -->
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="https://i.pinimg.com/736x/b4/26/50/b426500bc6011f0849f77cb2793c6267.jpg" alt="Енотовидная собака">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Енотовидная собака</h3>
+                            <p class="card-description">
+                                Всеядное животное. Активна ночью. 
+                                Обитает в поймах рек и лесах.
+                            </p>
+                            <div class="card-weight">до 10 кг</div>
+                            <div class="card-bars">
+                                <div class="bar season-restricted" title="Запрещено"></div>
+                                <div class="bar season-restricted" title="Запрещено"></div>
+                                <div class="bar season-allowed" title="Разрешено"></div>
+                                <div class="bar season-allowed" title="Разрешено"></div>
+                                <div class="bar season-allowed" title="Разрешено"></div>
+                            </div>
+                            <div class="season-labels">
+                                <span>Весна</span>
+                                <span>Лето</span>
+                                <span>Осень</span>
+                                <span>Зима</span>
+                                <span>Круглый год</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Saiga (Red Book) -->
+                    <div class="card redbook-card">
+                        <div class="redbook-badge">Красная книга</div>
+                        <div class="card-image">
+                            <img src="https://i.pinimg.com/1200x/13/39/c8/1339c8a0dd75721f9ff1d299c5ca50b0.jpg" alt="Сайгак">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Сайгак</h3>
+                            <p class="card-description">
+                                Редкая степная антилопа. Внесена в Красную книгу России. 
+                                Обитает в степях Ростовской области.
+                            </p>
+                            <div class="card-weight">до 50 кг</div>
+                            <div class="card-bars">
+                                <div class="bar season-redbook" title="Красная книга"></div>
+                                <div class="bar season-redbook" title="Красная книга"></div>
+                                <div class="bar season-redbook" title="Красная книга"></div>
+                                <div class="bar season-redbook" title="Красная книга"></div>
+                                <div class="bar season-redbook" title="Красная книга"></div>
+                            </div>
+                            <div class="season-labels">
+                                <span>Весна</span>
+                                <span>Лето</span>
+                                <span>Осень</span>
+                                <span>Зима</span>
+                                <span>Круглый год</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Russian Desman (Red Book) -->
+                    <div class="card redbook-card">
+                        <div class="redbook-badge">Красная книга</div>
+                        <div class="card-image">
+                            <img src="https://i.pinimg.com/1200x/96/94/d0/9694d0326bbf2cfb400c2f8a98833f17.jpg" alt="Выхухоль">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Русская выхухоль</h3>
+                            <p class="card-description">
+                                Редкое полуводное млекопитающее. Внесена в Красную книгу. 
+                                Обитает в поймах рек Дона.
+                            </p>
+                            <div class="card-weight">до 500 г</div>
+                            <div class="card-bars">
+                                <div class="bar season-redbook" title="Красная книга"></div>
+                                <div class="bar season-redbook" title="Красная книга"></div>
+                                <div class="bar season-redbook" title="Красная книга"></div>
+                                <div class="bar season-redbook" title="Красная книга"></div>
+                                <div class="bar season-redbook" title="Красная книга"></div>
+                            </div>
+                            <div class="season-labels">
+                                <span>Весна</span>
+                                <span>Лето</span>
+                                <span>Осень</span>
+                                <span>Зима</span>
+                                <span>Круглый год</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Birds Tab Content -->
+            <div class="tab-content" id="birds">
+                <div class="cards-grid">
+                    
+                    <!-- Mallard -->
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="https://i.pinimg.com/1200x/5c/77/71/5c77712bcc8eae3688dd3bbebd6e33e7.jpg" alt="Утка">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Кряква</h3>
+                            <p class="card-description">
+                                Самая распространённая утка. Обитает на водоёмах 
+                                с растительностью. Мигрирующая птица.
+                            </p>
+                            <div class="card-weight">до 1.5 кг</div>
+                            <div class="card-bars">
+                                <div class="bar season-restricted" title="Запрещено"></div>
+                                <div class="bar season-limited" title="Ограничено"></div>
+                                <div class="bar season-allowed" title="Разрешено"></div>
+                                <div class="bar season-allowed" title="Разрешено"></div>
+                                <div class="bar season-restricted" title="Запрещено"></div>
+                            </div>
+                            <div class="season-labels">
+                                <span>Весна</span>
+                                <span>Лето</span>
+                                <span>Осень</span>
+                                <span>Зима</span>
+                                <span>Круглый год</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Goose -->
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="https://i.pinimg.com/736x/ac/94/96/ac9496e92a8470be9b958ee9ee71c5ae.jpg" alt="Гусь">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Серый гусь</h3>
+                            <p class="card-description">
+                                Крупная водоплавающая птица. Держится стаями. 
+                                Обитает на озёрах и болотах.
+                            </p>
+                            <div class="card-weight">до 6 кг</div>
+                            <div class="card-bars">
+                                <div class="bar season-allowed" title="Разрешено"></div>
+                                <div class="bar season-restricted" title="Запрещено"></div>
+                                <div class="bar season-allowed" title="Разрешено"></div>
+                                <div class="bar season-allowed" title="Разрешено"></div>
+                                <div class="bar season-restricted" title="Запрещено"></div>
+                            </div>
+                            <div class="season-labels">
+                                <span>Весна</span>
+                                <span>Лето</span>
+                                <span>Осень</span>
+                                <span>Зима</span>
+                                <span>Круглый год</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pheasant -->
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="https://i.pinimg.com/1200x/37/d1/5f/37d15f5ebebc787ee46596e5156570dc.jpg" alt="Фазан">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Фазан</h3>
+                            <p class="card-description">
+                                Яркая птица семейства куриных. Обитает в зарослях 
+                                кустарников и камышах.
+                            </p>
+                            <div class="card-weight">до 2 кг</div>
+                            <div class="card-bars">
+                                <div class="bar season-restricted" title="Запрещено"></div>
+                                <div class="bar season-restricted" title="Запрещено"></div>
+                                <div class="bar season-allowed" title="Разрешено"></div>
+                                <div class="bar season-limited" title="Ограничено"></div>
+                                <div class="bar season-restricted" title="Запрещено"></div>
+                            </div>
+                            <div class="season-labels">
+                                <span>Весна</span>
+                                <span>Лето</span>
+                                <span>Осень</span>
+                                <span>Зима</span>
+                                <span>Круглый год</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Woodcock -->
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="https://i.pinimg.com/736x/d0/86/a4/d086a463812a789b36b90c45f90075a1.jpg" alt="Вальдшнеп">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Вальдшнеп</h3>
+                            <p class="card-description">
+                                Лесная птица с длинным клювом. Ведёт скрытный 
+                                образ жизни. Активен на зорях.
+                            </p>
+                            <div class="card-weight">до 400 г</div>
+                            <div class="card-bars">
+                                <div class="bar season-allowed" title="Разрешено"></div>
+                                <div class="bar season-restricted" title="Запрещено"></div>
+                                <div class="bar season-allowed" title="Разрешено"></div>
+                                <div class="bar season-allowed" title="Разрешено"></div>
+                                <div class="bar season-restricted" title="Запрещено"></div>
+                            </div>
+                            <div class="season-labels">
+                                <span>Весна</span>
+                                <span>Лето</span>
+                                <span>Осень</span>
+                                <span>Зима</span>
+                                <span>Круглый год</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quail -->
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="https://i.pinimg.com/736x/df/c6/5e/dfc65ebfad611cafb8364898718078ab.jpg" alt="Перепел">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Перепел</h3>
+                            <p class="card-description">
+                                Маленькая птица семейства куриных. Обитает в полях 
+                                и на лугах. Мигрирующая птица.
+                            </p>
+                            <div class="card-weight">до 150 г</div>
+                            <div class="card-bars">
+                                <div class="bar season-restricted" title="Запрещено"></div>
+                                <div class="bar season-limited" title="Ограничено"></div>
+                                <div class="bar season-allowed" title="Разрешено"></div>
+                                <div class="bar season-allowed" title="Разрешено"></div>
+                                <div class="bar season-restricted" title="Запрещено"></div>
+                            </div>
+                            <div class="season-labels">
+                                <span>Весна</span>
+                                <span>Лето</span>
+                                <span>Осень</span>
+                                <span>Зима</span>
+                                <span>Круглый год</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Wood Pigeon -->
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="https://i.pinimg.com/1200x/b9/d2/52/b9d252153246d7a3026b8c3be5a763e3.jpg" alt="Голубь">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Витютень</h3>
+                            <p class="card-description">
+                                Дикий сизый голубь. Держится стаями. 
+                                Обитает в лесостепной зоне.
+                            </p>
+                            <div class="card-weight">до 600 г</div>
+                            <div class="card-bars">
+                                <div class="bar season-restricted" title="Запрещено"></div>
+                                <div class="bar season-restricted" title="Запрещено"></div>
+                                <div class="bar season-allowed" title="Разрешено"></div>
+                                <div class="bar season-limited" title="Ограничено"></div>
+                                <div class="bar season-restricted" title="Запрещено"></div>
+                            </div>
+                            <div class="season-labels">
+                                <span>Весна</span>
+                                <span>Лето</span>
+                                <span>Осень</span>
+                                <span>Зима</span>
+                                <span>Круглый год</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Partridge -->
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="https://i.pinimg.com/736x/03/e6/08/03e6082e00bb3ef8a0882f819173fccb.jpg" alt="Куропатка">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Серая куропатка</h3>
+                            <p class="card-description">
+                                Оседлая птица. Обитает в полях и степях. 
+                                Держится стаями зимой.
+                            </p>
+                            <div class="card-weight">до 500 г</div>
+                            <div class="card-bars">
+                                <div class="bar season-restricted" title="Запрещено"></div>
+                                <div class="bar season-restricted" title="Запрещено"></div>
+                                <div class="bar season-allowed" title="Разрешено"></div>
+                                <div class="bar season-allowed" title="Разрешено"></div>
+                                <div class="bar season-allowed" title="Разрешено"></div>
+                            </div>
+                            <div class="season-labels">
+                                <span>Весна</span>
+                                <span>Лето</span>
+                                <span>Осень</span>
+                                <span>Зима</span>
+                                <span>Круглый год</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Crane -->
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="https://i.pinimg.com/1200x/d9/cf/5d/d9cf5d03792b520d49855a6facc6c849.jpg" alt="Журавль">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Серый журавль</h3>
+                            <p class="card-description">
+                                Крупная перелётная птица. Обитает на болотах 
+                                и влажных лугах.
+                            </p>
+                            <div class="card-weight">до 6 кг</div>
+                            <div class="card-bars">
+                                <div class="bar season-restricted" title="Запрещено"></div>
+                                <div class="bar season-restricted" title="Запрещено"></div>
+                                <div class="bar season-restricted" title="Запрещено"></div>
+                                <div class="bar season-restricted" title="Запрещено"></div>
+                                <div class="bar season-restricted" title="Запрещено"></div>
+                            </div>
+                            <div class="season-labels">
+                                <span>Весна</span>
+                                <span>Лето</span>
+                                <span>Осень</span>
+                                <span>Зима</span>
+                                <span>Круглый год</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Great Bustard (Red Book) -->
+                    <div class="card redbook-card">
+                        <div class="redbook-badge">Красная книга</div>
+                        <div class="card-image">
+                            <img src="https://i.pinimg.com/1200x/7c/78/4e/7c784ed6fccd18394854c5050152c6e4.jpg" alt="Дрофа">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Дрофа</h3>
+                            <p class="card-description">
+                                Крупнейшая летающая птица России. Внесена в Красную книгу. 
+                                Обитает в степях Ростовской области.
+                            </p>
+                            <div class="card-weight highlighted">до 20 кг</div>
+                            <div class="card-bars">
+                                <div class="bar season-redbook" title="Красная книга"></div>
+                                <div class="bar season-redbook" title="Красная книга"></div>
+                                <div class="bar season-redbook" title="Красная книга"></div>
+                                <div class="bar season-redbook" title="Красная книга"></div>
+                                <div class="bar season-redbook" title="Красная книга"></div>
+                            </div>
+                            <div class="season-labels">
+                                <span>Весна</span>
+                                <span>Лето</span>
+                                <span>Осень</span>
+                                <span>Зима</span>
+                                <span>Круглый год</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- White-tailed Eagle (Red Book) -->
+                    <div class="card redbook-card">
+                        <div class="redbook-badge">Красная книга</div>
+                        <div class="card-image">
+                            <img src="https://images.unsplash.com/photo-1611689342806-0863700ce1e4?w=400" alt="Орлан">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Орлан-белохвост</h3>
+                            <p class="card-description">
+                                Крупный хищник. Внесён в Красную книгу России. 
+                                Обитает в поймах рек Дона.
+                            </p>
+                            <div class="card-weight highlighted">до 7 кг</div>
+                            <div class="card-bars">
+                                <div class="bar season-redbook" title="Красная книга"></div>
+                                <div class="bar season-redbook" title="Красная книга"></div>
+                                <div class="bar season-redbook" title="Красная книга"></div>
+                                <div class="bar season-redbook" title="Красная книга"></div>
+                                <div class="bar season-redbook" title="Красная книга"></div>
+                            </div>
+                            <div class="season-labels">
+                                <span>Весна</span>
+                                <span>Лето</span>
+                                <span>Осень</span>
+                                <span>Зима</span>
+                                <span>Круглый год</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- JavaScript -->
+    <script>
+        function switchTab(tabName, clickedButton) {
+            const allTabButtons = document.querySelectorAll('.tab-btn');
+            const allTabContents = document.querySelectorAll('.tab-content');
+            const contentWrapper = document.getElementById('contentWrapper');
+            
+            allTabButtons.forEach(btn => btn.classList.remove('active'));
+            allTabContents.forEach(content => content.classList.remove('active'));
+            
+            clickedButton.classList.add('active');
+            
+            const targetContent = document.getElementById(tabName);
+            if (targetContent) {
+                targetContent.classList.add('active');
+            }
+            
+            contentWrapper.setAttribute('data-theme', tabName);
+        }
+    </script>
+</body>
+</html>
