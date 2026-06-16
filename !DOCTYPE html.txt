@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="rus">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{titre_de_votre_page}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        main {
+            background-color: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Крепкая Охота</h1>
+    </header>
+    <main>
+        <h2>{titre_de_section}</h2>
+        <p>{contenu_principal}</p>
+    </main>
+    <footer>
+        <p>&copy; 2024 {nom_de_votre_site}. Tous droits réservés.</p>
+    </footer>
+</body>
+</html>
