@@ -106,7 +106,7 @@
   "features": [
     {
       "type": "Feature",
-      "properties": { "id": 1, "name": "Азовский район", "groundType": "общедоступное" },
+      "properties": { "id": 1, "name": "Ростов-на-Дону", "groundType": "общедоступное" },
       "geometry": { "type": "Polygon", "coordinates": [[[39.1,47.1],[39.4,47.1],[39.4,47.3],[39.1,47.3],[39.1,47.1]]] }
     }
   ]
@@ -120,7 +120,7 @@
 ```json
 {
   "id": 1,
-  "name": "Азовский район",
+  "name": "Ростов-на-Дону",
   "groundType": "общедоступное",
   "description": "Угодья в дельте Дона…"
 }
@@ -147,7 +147,7 @@
 **Ответ `200`:**
 ```json
 {
-  "region": { "id": 1, "name": "Азовский район" },
+  "region": { "id": 1, "name": "Ростов-на-Дону" },
   "season": "autumn",
   "mode": "hunting",
   "species": [

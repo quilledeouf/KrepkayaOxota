@@ -3,33 +3,8 @@
   "features": [
     {
       "type": "Feature",
-      "properties": { "id": 1, "name": "Азовский район", "groundType": "общедоступное" },
-      "geometry": { "type": "Polygon", "coordinates": [[[39.05, 46.95], [39.55, 46.95], [39.55, 47.25], [39.05, 47.25], [39.05, 46.95]]] }
-    },
-    {
-      "type": "Feature",
-      "properties": { "id": 2, "name": "Сальский район", "groundType": "закреплённое" },
-      "geometry": { "type": "Polygon", "coordinates": [[[41.2, 46.25], [41.85, 46.25], [41.85, 46.7], [41.2, 46.7], [41.2, 46.25]]] }
-    },
-    {
-      "type": "Feature",
-      "properties": { "id": 3, "name": "Цимлянский район", "groundType": "общедоступное" },
-      "geometry": { "type": "Polygon", "coordinates": [[[42.0, 47.5], [42.7, 47.5], [42.7, 47.9], [42.0, 47.9], [42.0, 47.5]]] }
-    },
-    {
-      "type": "Feature",
-      "properties": { "id": 4, "name": "Шолоховский район", "groundType": "общедоступное" },
-      "geometry": { "type": "Polygon", "coordinates": [[[41.4, 49.4], [42.3, 49.4], [42.3, 49.85], [41.4, 49.85], [41.4, 49.4]]] }
-    },
-    {
-      "type": "Feature",
-      "properties": { "id": 5, "name": "Морозовский район", "groundType": "закреплённое" },
-      "geometry": { "type": "Polygon", "coordinates": [[[41.6, 48.15], [42.4, 48.15], [42.4, 48.55], [41.6, 48.55], [41.6, 48.15]]] }
-    },
-    {
-      "type": "Feature",
-      "properties": { "id": 6, "name": "Неклиновский район", "groundType": "общедоступное" },
-      "geometry": { "type": "Polygon", "coordinates": [[[38.35, 47.05], [38.95, 47.05], [38.95, 47.35], [38.35, 47.35], [38.35, 47.05]]] }
+      "properties": { "id": 1, "name": "Ростов-на-Дону", "groundType": "общедоступное" },
+      "geometry": { "type": "Polygon", "coordinates": [[[39.45, 47.05], [40.0, 47.05], [40.0, 47.4], [39.45, 47.4], [39.45, 47.05]]] }
     }
   ]
 }
