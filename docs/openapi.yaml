@@ -1,0 +1,275 @@
+openapi: 3.0.3
+info:
+  title: Крепкая Охота API
+  version: "1.0.0"
+  description: >
+    REST API сервиса «Крепкая Охота» — карта доступной к охоте/вылову дичи и рыбы
+    по регионам Ростовской области с учётом сезона. На MVP не реализовано;
+    контракт зафиксирован для параллельной разработки frontend/backend.
+servers:
+  - url: /api/v1
+
+tags:
+  - name: Справочники
+  - name: Регионы
+  - name: Виды
+  - name: Избранное
+
+paths:
+  /categories:
+    get:
+      tags: [Справочники]
+      summary: Список режимов (охота/рыбалка)
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/Category" }
+
+  /seasons:
+    get:
+      tags: [Справочники]
+      summary: Список сезонов
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/Season" }
+
+  /regions:
+    get:
+      tags: [Регионы]
+      summary: Список/поиск регионов (GeoJSON)
+      parameters:
+        - { name: q, in: query, schema: { type: string }, description: Поиск по названию }
+        - { name: mode, in: query, schema: { type: string, enum: [hunting, fishing] } }
+      responses:
+        "200":
+          description: FeatureCollection с регионами
+          content:
+            application/json:
+              schema: { type: object }
+
+  /regions/{id}:
+    get:
+      tags: [Регионы]
+      summary: Детали региона
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: integer } }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Region" }
+        "404":
+          description: Регион не найден
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Error" }
+
+  /regions/{id}/species:
+    get:
+      tags: [Регионы]
+      summary: Доступные виды в регионе по режиму и сезону (основной сценарий F3)
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: integer } }
+        - { name: mode, in: query, required: true, schema: { type: string, enum: [hunting, fishing] } }
+        - { name: season, in: query, schema: { type: string, enum: [spring, summer, autumn, winter] } }
+        - { name: onlyAllowed, in: query, schema: { type: boolean } }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/RegionSpecies" }
+        "400":
+          description: Невалидные параметры
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Error" }
+        "404":
+          description: Регион не найден
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Error" }
+
+  /species:
+    get:
+      tags: [Виды]
+      summary: Каталог видов
+      parameters:
+        - { name: mode, in: query, schema: { type: string, enum: [hunting, fishing] } }
+        - { name: q, in: query, schema: { type: string } }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/SpeciesShort" }
+
+  /species/{id}:
+    get:
+      tags: [Виды]
+      summary: Карточка вида
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: integer } }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Species" }
+        "404":
+          description: Вид не найден
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Error" }
+
+  /species/{id}/regions:
+    get:
+      tags: [Виды]
+      summary: Регионы, где встречается вид (подсветка на карте F5)
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: integer } }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  speciesId: { type: integer }
+                  regionIds: { type: array, items: { type: integer } }
+
+  /favorites:
+    get:
+      tags: [Избранное]
+      summary: Избранные регионы пользователя
+      security: [{ bearerAuth: [] }]
+      responses:
+        "200": { description: OK }
+        "401":
+          description: Не авторизован
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Error" }
+    post:
+      tags: [Избранное]
+      summary: Добавить регион в избранное
+      security: [{ bearerAuth: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [regionId]
+              properties:
+                regionId: { type: integer }
+      responses:
+        "201": { description: Создано }
+        "401":
+          description: Не авторизован
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Error" }
+        "409":
+          description: Уже в избранном
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Error" }
+
+  /favorites/{regionId}:
+    delete:
+      tags: [Избранное]
+      summary: Удалить регион из избранного
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: regionId, in: path, required: true, schema: { type: integer } }
+      responses:
+        "204": { description: Удалено }
+        "401":
+          description: Не авторизован
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Error" }
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    Category:
+      type: object
+      properties:
+        id: { type: integer }
+        code: { type: string, enum: [hunting, fishing] }
+        title: { type: string }
+    Season:
+      type: object
+      properties:
+        id: { type: integer }
+        code: { type: string, enum: [spring, summer, autumn, winter] }
+        title: { type: string }
+        monthFrom: { type: integer }
+        monthTo: { type: integer }
+    Region:
+      type: object
+      properties:
+        id: { type: integer }
+        name: { type: string }
+        groundType: { type: string }
+        description: { type: string }
+    SpeciesShort:
+      type: object
+      properties:
+        id: { type: integer }
+        name: { type: string }
+        category: { type: string }
+        photoUrl: { type: string }
+    Species:
+      allOf:
+        - $ref: "#/components/schemas/SpeciesShort"
+        - type: object
+          properties:
+            latinName: { type: string }
+            description: { type: string }
+    RegionSpecies:
+      type: object
+      properties:
+        region: { $ref: "#/components/schemas/Region" }
+        season: { type: string }
+        mode: { type: string }
+        species:
+          type: array
+          items:
+            type: object
+            properties:
+              id: { type: integer }
+              name: { type: string }
+              photoUrl: { type: string }
+              isAllowed: { type: boolean }
+              dateFrom: { type: string, format: date, nullable: true }
+              dateTo: { type: string, format: date, nullable: true }
+              restriction: { type: string, nullable: true }
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code: { type: string }
+            message: { type: string }
+            details: { nullable: true }
