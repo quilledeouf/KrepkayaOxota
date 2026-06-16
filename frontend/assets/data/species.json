@@ -1,0 +1,12 @@
+[
+  { "id": 10, "categoryId": 1, "name": "Кабан", "latinName": "Sus scrofa", "emoji": "🐗", "description": "Крупный охотничий зверь, активен в пойменных лесах." },
+  { "id": 11, "categoryId": 1, "name": "Заяц-русак", "latinName": "Lepus europaeus", "emoji": "🐇", "description": "Распространён в степной зоне области." },
+  { "id": 12, "categoryId": 1, "name": "Косуля", "latinName": "Capreolus capreolus", "emoji": "🦌", "description": "Лесостепной вид, охота по лицензии." },
+  { "id": 13, "categoryId": 1, "name": "Утка кряква", "latinName": "Anas platyrhynchos", "emoji": "🦆", "description": "Водоплавающая дичь, массовый объект охоты." },
+  { "id": 14, "categoryId": 1, "name": "Фазан", "latinName": "Phasianus colchicus", "emoji": "🐓", "description": "Полевая дичь." },
+  { "id": 20, "categoryId": 2, "name": "Судак", "latinName": "Sander lucioperca", "emoji": "🐟", "description": "Хищная рыба семейства окунёвых." },
+  { "id": 21, "categoryId": 2, "name": "Лещ", "latinName": "Abramis brama", "emoji": "🐟", "description": "Стайная рыба, обычна в водохранилищах." },
+  { "id": 22, "categoryId": 2, "name": "Сазан", "latinName": "Cyprinus carpio", "emoji": "🐠", "description": "Крупная карповая рыба." },
+  { "id": 23, "categoryId": 2, "name": "Щука", "latinName": "Esox lucius", "emoji": "🐡", "description": "Хищник, нерест ранней весной." },
+  { "id": 24, "categoryId": 2, "name": "Тарань", "latinName": "Rutilus heckelii", "emoji": "🐟", "description": "Полупроходная плотва Азово-Донского бассейна." }
+]
