@@ -1,21 +1,9 @@
-/*
- * data.js — демо-данные прототипа «Крепкая Охота».
- *
- * На MVP данные встроены прямо в страницу (через window.APP_DATA), чтобы
- * прототип работал даже при открытии index.html двойным кликом (file://),
- * без локального сервера и без бэкенда.
- *
- * На этапе 2 эти же данные будут приходить из REST API (см. docs/API.md),
- * а здесь останется только заглушка. Структура совпадает с db/seed.sql.
- */
 window.APP_DATA = {
-  // Режимы (F2)
   categories: [
     { id: 1, code: 'hunting', title: 'Охота' },
     { id: 2, code: 'fishing', title: 'Рыбалка' },
   ],
 
-  // Сезоны (F4)
   seasons: [
     { id: 1, code: 'spring', title: 'Весна', monthFrom: 3, monthTo: 5 },
     { id: 2, code: 'summer', title: 'Лето', monthFrom: 6, monthTo: 8 },
@@ -23,7 +11,6 @@ window.APP_DATA = {
     { id: 4, code: 'winter', title: 'Зима', monthFrom: 12, monthTo: 2 },
   ],
 
-  // Виды: дичь (categoryId 1) и рыба (categoryId 2) (F6)
   species: [
     { id: 10, categoryId: 1, name: 'Кабан', latinName: 'Sus scrofa', emoji: '🐗', description: 'Крупный охотничий зверь, активен в пойменных лесах.' },
     { id: 11, categoryId: 1, name: 'Заяц-русак', latinName: 'Lepus europaeus', emoji: '🐇', description: 'Распространён в степной зоне области.' },
@@ -37,10 +24,7 @@ window.APP_DATA = {
     { id: 24, categoryId: 2, name: 'Тарань', latinName: 'Rutilus heckelii', emoji: '🐟', description: 'Полупроходная плотва Азово-Донского бассейна.' },
   ],
 
-  // Доступность: что × где × когда (F3). seasonId: 1 весна,2 лето,3 осень,4 зима
-  // Scope прототипа — только регион Ростов-на-Дону (regionId: 1).
   availability: [
-    // ── Охота (дичь) ──
     { regionId: 1, speciesId: 13, seasonId: 1, isAllowed: false, dateFrom: null, dateTo: null, restriction: 'весенний запрет' },
     { regionId: 1, speciesId: 10, seasonId: 2, isAllowed: true, dateFrom: '2026-06-01', dateTo: '2026-08-31', restriction: 'по путёвке, ограниченно' },
     { regionId: 1, speciesId: 13, seasonId: 3, isAllowed: true, dateFrom: '2026-09-01', dateTo: '2026-11-30', restriction: 'нормы добычи' },
@@ -49,7 +33,6 @@ window.APP_DATA = {
     { regionId: 1, speciesId: 12, seasonId: 3, isAllowed: true, dateFrom: '2026-10-01', dateTo: '2026-12-31', restriction: 'по лицензии' },
     { regionId: 1, speciesId: 11, seasonId: 4, isAllowed: true, dateFrom: '2026-11-01', dateTo: '2027-01-15', restriction: null },
     { regionId: 1, speciesId: 10, seasonId: 4, isAllowed: true, dateFrom: '2026-11-01', dateTo: '2026-12-31', restriction: 'по путёвке' },
-    // ── Рыбалка (рыба) ──
     { regionId: 1, speciesId: 24, seasonId: 1, isAllowed: true, dateFrom: '2026-03-01', dateTo: '2026-03-31', restriction: 'до начала нереста' },
     { regionId: 1, speciesId: 20, seasonId: 1, isAllowed: false, dateFrom: null, dateTo: null, restriction: 'нерестовый запрет' },
     { regionId: 1, speciesId: 23, seasonId: 1, isAllowed: false, dateFrom: null, dateTo: null, restriction: 'нерестовый запрет' },
@@ -63,8 +46,6 @@ window.APP_DATA = {
     { regionId: 1, speciesId: 20, seasonId: 4, isAllowed: true, dateFrom: '2026-12-01', dateTo: '2027-02-28', restriction: 'суточная норма' },
   ],
 
-  // Регион в формате GeoJSON (F1). Scope прототипа — только Ростов-на-Дону;
-  // остальные регионы Ростовской обл. добавляются позже (вне scope, см. README).
   regions: {
     type: 'FeatureCollection',
     features: [
