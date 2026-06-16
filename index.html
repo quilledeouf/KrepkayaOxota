@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Крепкая Охота - Главная</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Дополнительные стили только для главной страницы */
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1a2a1a 0%, #2b3a28 50%, #3a4f36 100%);
+            color: white;
+            padding: 60px 40px;
+            border-radius: 20px;
+            margin-bottom: 50px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(240, 165, 0, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(76, 175, 80, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: 0.5px;
+        }
+
+        .hero h1 span {
+            color: #f0a500;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: rgba(255,255,255,0.85);
+            max-width: 600px;
+            margin: 0 auto 30px;
+            line-height: 1.7;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .btn-primary {
+            background-color: #f0a500;
+            color: #1a1a1a;
+        }
+
+        .btn-secondary {
+            background-color: rgba(255,255,255,0.15);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(255,255,255,0.25);
+        }
+
+        /* Regions Section */
+        .section-title {
+            font-size: 32px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 12px;
+            color: #1a1a1a;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #888;
+            font-size: 17px;
+            margin-bottom: 40px;
+        }
+
+        .regions-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-bottom: 60px;
+        }
+
+        .region-card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px 24px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .region-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+        }
+
+        .region-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .region-card h3 {
+            font-size: 20px;
+            margin-bottom: 8px;
+            color: #1a1a1a;
+        }
+
+        .region-card p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .region-card .region-count {
+            display: inline-block;
+            margin-top: 12px;
+            font-size: 13px;
+            color: #f0a500;
+            font-weight: 600;
+        }
+
+        /* Advantages */
+        .advantages {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            margin-bottom: 60px;
+        }
+
+        .advantage-item {
+            text-align: center;
+            padding: 20px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .advantage-item:hover {
+            transform: translateY(-3px);
+        }
+
+        .advantage-item .emoji {
+            font-size: 40px;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .advantage-item h4 {
+            font-size: 16px;
+            color: #1a1a1a;
+            margin-bottom: 4px;
+        }
+
+        .advantage-item p {
+            font-size: 13px;
+            color: #888;
+        }
+
+        /* Popular Species */
+        .popular-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 60px;
+        }
+
+        .popular-item {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .popular-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+        }
+
+        .popular-item img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .popular-item .info {
+            padding: 16px 18px;
+        }
+
+        .popular-item .info h4 {
+            font-size: 16px;
+            color: #1a1a1a;
+            margin-bottom: 4px;
+        }
+
+        .popular-item .info p {
+            font-size: 13px;
+            color: #888;
+            margin-top: 4px;
+        }
+
+        .popular-item .info .badge {
+            display: inline-block;
+            margin-top: 8px;
+            font-size: 11px;
+            padding: 3px 12px;
+            border-radius: 20px;
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .popular-item .info .badge.red {
+            background: #fce4ec;
+            color: #c62828;
+        }
+
+        .popular-item .info .badge.gold {
+            background: #fff8e1;
+            color: #f57f17;
+        }
+
+        /* CTA */
+        .cta-section {
+            background: #2b3a28;
+            color: white;
+            padding: 60px 40px;
+            border-radius: 20px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .cta-section h2 {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .cta-section p {
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 28px;
+            font-size: 18px;
+        }
+
+        .cta-section .btn-primary {
+            background-color: #f0a500;
+            color: #1a1a1a;
+        }
+
+        .cta-section .btn-primary:hover {
+            background-color: #e09a00;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .regions-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .advantages {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .popular-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 40px 20px;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .regions-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .advantages {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .popular-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+
+            .cta-section {
+                padding: 40px 20px;
+            }
+
+            .cta-section h2 {
+                font-size: 26px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .advantages {
+                grid-template-columns: 1fr;
+            }
+
+            .popular-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 26px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header - ТОЧНО ТАКОЙ ЖЕ как в handbook.html -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">
+                <img src="logo.jpg" alt="Крепкая Охота" class="logo-icon">
+                <span class="logo-text">Крепкая Охота</span>
+            </div>
+            <nav class="nav">
+                <a href="index.html" class="nav-link active">Главная</a>
+                <a href="#" class="nav-link">Карта</a>
+                <a href="handbook.html" class="nav-link">Справочник</a>
+                <a href="#" class="nav-link">Законы</a>
+                <a href="#" class="nav-link">Гиды</a>
+            </nav>
+            <div class="header-icons">
+                <div class="icon-circle"></div>
+                <div class="icon-circle"></div>
+                <div class="icon-circle"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="content-wrapper" style="background: transparent; padding: 0;">
+
+            <!-- HERO -->
+            <section class="hero">
+                <div class="hero-content">
+                    <h1>Добро пожаловать в <span>Крепкую Охоту</span></h1>
+                    <p>
+                        Территории Ростовской области разделены на регионы с доступной 
+                        к вылову или охоте дичью. Актуальные сезоны, карта угодий 
+                        и полный справочник видов — всё в одном месте.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#" class="btn btn-primary">Исследовать карту</a>
+                        <a href="handbook.html" class="btn btn-secondary">Перейти в справочник</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- РЕГИОНЫ РОСТОВСКОЙ ОБЛАСТИ -->
+            <h2 class="section-title">Регионы области</h2>
+            <p class="section-subtitle">Выберите район для просмотра доступной дичи</p>
+
+            <div class="regions-grid">
+                <div class="region-card">
+                    <span class="region-icon">🏞️</span>
+                    <h3>Северный</h3>
+                    <p>Леса и поймы рек. Обилие кабана, косули, водоплавающей птицы.</p>
+                    <span class="region-count">14 видов</span>
+                </div>
+                <div class="region-card">
+                    <span class="region-icon">🌾</span>
+                    <h3>Центральный</h3>
+                    <p>Степная зона. Полевая дичь, зайцы, лисы, куропатки.</p>
+                    <span class="region-count">12 видов</span>
+                </div>
+                <div class="region-card">
+                    <span class="region-icon">🏞️</span>
+                    <h3>Восточный</h3>
+                    <p>Пойма Дона и Цимлянское водохранилище. Отличная рыбалка.</p>
+                    <span class="region-count">18 видов</span>
+                </div>
+                <div class="region-card">
+                    <span class="region-icon">🌿</span>
+                    <h3>Западный</h3>
+                    <p>Смешанные леса и балки. Лось, косуля, тетерев.</p>
+                    <span class="region-count">10 видов</span>
+                </div>
+                <div class="region-card">
+                    <span class="region-icon">🏜️</span>
+                    <h3>Южный</h3>
+                    <p>Степи с редкими перелесками. Сайгак, орлан, стрепет.</p>
+                    <span class="region-count">8 видов</span>
+                </div>
+                <div class="region-card">
+                    <span class="region-icon">🏕️</span>
+                    <h3>Приазовский</h3>
+                    <p>Дельта Дона и побережье Азовского моря. Рыба, чайки, гуси.</p>
+                    <span class="region-count">16 видов</span>
+                </div>
+            </div>
+
+            <!-- ПРЕИМУЩЕСТВА -->
+            <h2 class="section-title">Почему мы?</h2>
+            <p class="section-subtitle">Всё для ответственного охотника и рыбака</p>
+
+            <div class="advantages">
+                <div class="advantage-item">
+                    <span class="emoji">🗺️</span>
+                    <h4>Актуальные сезоны</h4>
+                    <p>Мы отслеживаем изменения сроков охоты и рыболовства</p>
+                </div>
+                <div class="advantage-item">
+                    <span class="emoji">📋</span>
+                    <h4>Полный справочник</h4>
+                    <p>Более 50 видов рыб, птиц и животных с сезонными статусами</p>
+                </div>
+                <div class="advantage-item">
+                    <span class="emoji">⚖️</span>
+                    <h4>Законодательство</h4>
+                    <p>Все нормы, квоты и ограничения в удобном формате</p>
+                </div>
+                <div class="advantage-item">
+                    <span class="emoji">🎯</span>
+                    <h4>Проверенные гиды</h4>
+                    <p>Профессиональные егеря и инструкторы по области</p>
+                </div>
+            </div>
+
+            <!-- ПОПУЛЯРНЫЕ ВИДЫ -->
+            <h2 class="section-title">Популярные виды дичи</h2>
+            <p class="section-subtitle">Чаще всего выбирают охотники и рыбаки</p>
+
+            <div class="popular-grid">
+                <div class="popular-item">
+                    <img src="https://i.pinimg.com/1200x/0f/34/e0/0f34e0a0eaebf9fa7829a4436ea0fb2a.jpg" alt="Щука">
+                    <div class="info">
+                        <h4>Щука</h4>
+                        <p>Хищник, до 35 кг. Водоёмы Дона.</p>
+                        <span class="badge gold">Сезон: круглый год</span>
+                    </div>
+                </div>
+                <div class="popular-item">
+                    <img src="https://i.pinimg.com/736x/f7/c7/65/f7c765fe33d59bc586f5437e3cf55351.jpg" alt="Кабан">
+                    <div class="info">
+                        <h4>Кабан</h4>
+                        <p>До 200 кг. Леса и поймы.</p>
+                        <span class="badge">Сезон: осень-зима</span>
+                    </div>
+                </div>
+                <div class="popular-item">
+                    <img src="https://i.pinimg.com/1200x/5c/77/71/5c77712bcc8eae3688dd3bbebd6e33e7.jpg" alt="Кряква">
+                    <div class="info">
+                        <h4>Кряква</h4>
+                        <p>Самая массовая утка.</p>
+                        <span class="badge gold">Сезон: осень-зима</span>
+                    </div>
+                </div>
+                <div class="popular-item">
+                    <img src="https://i.pinimg.com/1200x/5e/bc/8b/5ebc8b29a94b5ae6b64ce3d045ecd387.jpg" alt="Сом">
+                    <div class="info">
+                        <h4>Сом</h4>
+                        <p>До 200+ кг. Дон, Цимла.</p>
+                        <span class="badge gold">Сезон: лето-осень</span>
+                    </div>
+                </div>
+                <div class="popular-item">
+                    <img src="https://i.pinimg.com/1200x/23/51/94/235194088ba92e88a1e28795f9e63784.jpg" alt="Лось">
+                    <div class="info">
+                        <h4>Лось</h4>
+                        <p>До 600 кг. Ростовские леса.</p>
+                        <span class="badge">Сезон: осень-зима</span>
+                    </div>
+                </div>
+                <div class="popular-item">
+                    <img src="https://i.pinimg.com/1200x/7d/79/82/7d7982efaa407018bb6662946c15dbad.jpg" alt="Карп">
+                    <div class="info">
+                        <h4>Карп</h4>
+                        <p>Мирная рыба, до 20 кг.</p>
+                        <span class="badge gold">Сезон: лето-осень</span>
+                    </div>
+                </div>
+                <div class="popular-item">
+                    <img src="https://i.pinimg.com/736x/ac/94/96/ac9496e92a8470be9b958ee9ee71c5ae.jpg" alt="Гусь">
+                    <div class="info">
+                        <h4>Серый гусь</h4>
+                        <p>Крупная перелётная птица.</p>
+                        <span class="badge gold">Сезон: осень</span>
+                    </div>
+                </div>
+                <div class="popular-item">
+                    <img src="https://i.pinimg.com/1200x/e3/55/1d/e3551d0f0378615578827c6483b36be7.jpg" alt="Стерлядь">
+                    <div class="info">
+                        <h4>Стерлядь</h4>
+                        <p>Редкая рыба, Красная книга.</p>
+                        <span class="badge red">❌ Запрещена</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA -->
+            <section class="cta-section">
+                <h2>Готовы к охоте или рыбалке?</h2>
+                <p>Изучите карту регионов, проверьте сезонные разрешения и отправляйтесь за трофеями.</p>
+                <a href="#" class="btn btn-primary">Открыть карту</a>
+            </section>
+
+        </div>
+    </main>
+</body>
+</html>
