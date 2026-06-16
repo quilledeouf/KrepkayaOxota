@@ -1,23 +1,10 @@
-/*
- * api.js — единый слой доступа к данным.
- *
- * ВАЖНО (см. CONTRIBUTING.md): UI никогда не лезет в данные напрямую — только
- * через этот модуль. Сейчас данные берутся из window.APP_DATA (data.js).
- * На этапе 2 достаточно заменить тела функций на fetch() к REST API
- * (docs/API.md) — остальной код менять не придётся.
- *
- * Все функции async/возвращают Promise — специально, чтобы будущий переход на
- * сетевые запросы не потребовал переписывать вызывающий код.
- */
 const Api = (() => {
   const db = window.APP_DATA;
 
-  // Имитация сетевой задержки (наглядно показывает асинхронность). 0 = мгновенно.
   const tick = (value) => Promise.resolve(value);
 
   const modeToCategoryId = (mode) => (mode === 'fishing' ? 2 : 1);
 
-  /** Текущий сезон по номеру месяца (для значения по умолчанию F4). */
   function currentSeasonCode(date = new Date()) {
     const m = date.getMonth() + 1; // 1..12
     if (m >= 3 && m <= 5) return 'spring';
@@ -28,12 +15,9 @@ const Api = (() => {
 
   const seasonByCode = (code) => db.seasons.find((s) => s.code === code) || null;
 
-  // ── Справочники ──────────────────────────────────────────
   const getCategories = () => tick(db.categories);
   const getSeasons = () => tick(db.seasons);
 
-  // ── Регионы (F1, F7) ─────────────────────────────────────
-  /** GeoJSON всех регионов (для карты). */
   const getRegionsGeoJSON = () => tick(db.regions);
 
   const getRegionById = (id) => {
@@ -41,7 +25,6 @@ const Api = (() => {
     return tick(f ? { id: f.properties.id, ...f.properties } : null);
   };
 
-  /** Поиск региона по части названия (F7). */
   const searchRegions = (query) => {
     const q = (query || '').trim().toLowerCase();
     if (!q) return tick([]);
@@ -51,12 +34,6 @@ const Api = (() => {
     return tick(list);
   };
 
-  // ── Доступность видов в регионе (F3 — основной сценарий) ──
-  /**
-   * Что можно добывать в регионе с учётом режима и сезона.
-   * @param {number} regionId
-   * @param {{mode?: string, season?: string}} opts
-   */
   function getRegionSpecies(regionId, opts = {}) {
     const mode = opts.mode || 'hunting';
     const seasonCode = opts.season || currentSeasonCode();
@@ -90,8 +67,6 @@ const Api = (() => {
     });
   }
 
-  // ── Виды (F5, F6) ────────────────────────────────────────
-  /** Каталог видов с фильтрами по режиму и названию. */
   function getAllSpecies(opts = {}) {
     let list = db.species.slice();
     if (opts.mode) list = list.filter((s) => s.categoryId === modeToCategoryId(opts.mode));
@@ -107,7 +82,6 @@ const Api = (() => {
     return tick(sp || null);
   };
 
-  /** В каких регионах встречается вид — для подсветки на карте (F5). */
   function getRegionsBySpecies(speciesId, opts = {}) {
     const season = opts.season ? seasonByCode(opts.season) : null;
     const ids = db.availability
