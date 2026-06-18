@@ -1,132 +1,99 @@
 /*
- * api.js — единый слой доступа к данным.
- *
- * ВАЖНО (см. CONTRIBUTING.md): UI никогда не лезет в данные напрямую — только
- * через этот модуль. Сейчас данные берутся из window.APP_DATA (data.js).
- * На этапе 2 достаточно заменить тела функций на fetch() к REST API
- * (docs/API.md) — остальной код менять не придётся.
- *
- * Все функции async/возвращают Promise — специально, чтобы будущий переход на
- * сетевые запросы не потребовал переписывать вызывающий код.
+ * api.js — единый слой доступа к данным (см. CONTRIBUTING.md).
+ * UI берёт данные только отсюда. Сейчас источник — window.APP_DATA (data.js);
+ * на этапе 2 тела функций заменяются на fetch() к REST API (docs/API.md).
+ * Все функции возвращают Promise, чтобы переход на сеть не ломал вызывающий код.
  */
 const Api = (() => {
   const db = window.APP_DATA;
+  const tick = (v) => Promise.resolve(v);
 
-  // Имитация сетевой задержки (наглядно показывает асинхронность). 0 = мгновенно.
-  const tick = (value) => Promise.resolve(value);
+  const districtName = (id) => (db.districts.find((d) => d.id === id) || {}).name || '—';
+  const speciesById = (id) => db.species.find((s) => s.id === id) || null;
 
-  const modeToCategoryId = (mode) => (mode === 'fishing' ? 2 : 1);
-
-  /** Текущий сезон по номеру месяца (для значения по умолчанию F4). */
   function currentSeasonCode(date = new Date()) {
-    const m = date.getMonth() + 1; // 1..12
+    const m = date.getMonth() + 1;
     if (m >= 3 && m <= 5) return 'spring';
     if (m >= 6 && m <= 8) return 'summer';
     if (m >= 9 && m <= 11) return 'autumn';
     return 'winter';
   }
 
-  const seasonByCode = (code) => db.seasons.find((s) => s.code === code) || null;
-
   // ── Справочники ──────────────────────────────────────────
-  const getCategories = () => tick(db.categories);
   const getSeasons = () => tick(db.seasons);
+  const getDistricts = () => tick(db.districts);
+  const getCategories = () => tick(db.categories);
+  const getLaws = () => tick(db.laws);
 
-  // ── Регионы (F1, F7) ─────────────────────────────────────
-  /** GeoJSON всех регионов (для карты). */
-  const getRegionsGeoJSON = () => tick(db.regions);
-
-  const getRegionById = (id) => {
-    const f = db.regions.features.find((x) => x.properties.id === Number(id));
-    return tick(f ? { id: f.properties.id, ...f.properties } : null);
-  };
-
-  /** Поиск региона по части названия (F7). */
-  const searchRegions = (query) => {
-    const q = (query || '').trim().toLowerCase();
-    if (!q) return tick([]);
-    const list = db.regions.features
-      .filter((f) => f.properties.name.toLowerCase().includes(q))
-      .map((f) => ({ id: f.properties.id, name: f.properties.name }));
-    return tick(list);
-  };
-
-  // ── Доступность видов в регионе (F3 — основной сценарий) ──
-  /**
-   * Что можно добывать в регионе с учётом режима и сезона.
-   * @param {number} regionId
-   * @param {{mode?: string, season?: string}} opts
-   */
-  function getRegionSpecies(regionId, opts = {}) {
-    const mode = opts.mode || 'hunting';
-    const seasonCode = opts.season || currentSeasonCode();
-    const season = seasonByCode(seasonCode);
-    const catId = modeToCategoryId(mode);
-
-    const region = db.regions.features.find((f) => f.properties.id === Number(regionId));
-    if (!region) {
-      return Promise.reject({ code: 'REGION_NOT_FOUND', message: `Регион id=${regionId} не найден` });
-    }
-
-    const rows = db.availability
-      .filter((a) => a.regionId === Number(regionId) && (!season || a.seasonId === season.id))
-      .map((a) => ({ a, sp: db.species.find((s) => s.id === a.speciesId) }))
-      .filter((x) => x.sp && x.sp.categoryId === catId)
-      .map(({ a, sp }) => ({
-        id: sp.id,
-        name: sp.name,
-        emoji: sp.emoji,
-        isAllowed: a.isAllowed,
-        dateFrom: a.dateFrom,
-        dateTo: a.dateTo,
-        restriction: a.restriction,
-      }));
-
-    return tick({
-      region: { id: region.properties.id, name: region.properties.name },
-      mode,
-      season: seasonCode,
-      species: rows,
-    });
-  }
-
-  // ── Виды (F5, F6) ────────────────────────────────────────
-  /** Каталог видов с фильтрами по режиму и названию. */
-  function getAllSpecies(opts = {}) {
+  // ── Виды (Справочник, F6) ────────────────────────────────
+  function getSpecies({ cat, q } = {}) {
     let list = db.species.slice();
-    if (opts.mode) list = list.filter((s) => s.categoryId === modeToCategoryId(opts.mode));
-    if (opts.q) {
-      const q = opts.q.trim().toLowerCase();
-      list = list.filter((s) => s.name.toLowerCase().includes(q));
+    if (cat) list = list.filter((s) => s.cat === cat);
+    if (q) {
+      const t = q.trim().toLowerCase();
+      list = list.filter((s) => s.name.toLowerCase().includes(t) || (s.latin || '').toLowerCase().includes(t));
     }
     return tick(list);
   }
+  const getSpeciesById = (id) => tick(speciesById(Number(id)));
 
-  const getSpeciesById = (id) => {
-    const sp = db.species.find((s) => s.id === Number(id));
-    return tick(sp || null);
-  };
+  // ── Места (F1, F3, F7) ───────────────────────────────────
+  /** Места с раскрытыми районом и видами. Фильтры: тип, сезон, район, поиск. */
+  function getPlaces({ type, season, districtId, q, speciesId } = {}) {
+    let list = db.places.slice();
+    if (type && type !== 'all') list = list.filter((p) => p.type === type || p.type === 'both');
+    if (districtId) list = list.filter((p) => p.districtId === Number(districtId));
+    if (season) list = list.filter((p) => p.bestSeasons.includes(season));
+    if (speciesId) list = list.filter((p) => p.speciesIds.includes(Number(speciesId)));
+    if (q) {
+      const t = q.trim().toLowerCase();
+      list = list.filter(
+        (p) => p.name.toLowerCase().includes(t) || districtName(p.districtId).toLowerCase().includes(t)
+      );
+    }
+    return tick(list.map(expandPlace));
+  }
 
-  /** В каких регионах встречается вид — для подсветки на карте (F5). */
-  function getRegionsBySpecies(speciesId, opts = {}) {
-    const season = opts.season ? seasonByCode(opts.season) : null;
-    const ids = db.availability
-      .filter((a) => a.speciesId === Number(speciesId) && (!season || a.seasonId === season.id))
-      .map((a) => a.regionId);
-    return tick([...new Set(ids)]);
+  function getPlaceById(id) {
+    const p = db.places.find((x) => x.id === Number(id));
+    return tick(p ? expandPlace(p) : null);
+  }
+
+  /** Место дня — самое высокооценённое. */
+  function getFeaturedPlace() {
+    const top = db.places.slice().sort((a, b) => b.rating - a.rating)[0];
+    return tick(expandPlace(top));
+  }
+
+  function expandPlace(p) {
+    return {
+      ...p,
+      district: districtName(p.districtId),
+      species: p.speciesIds.map(speciesById).filter(Boolean),
+    };
+  }
+
+  /** Места, сгруппированные по районам (выбор пользователя). */
+  async function getPlacesByDistrict(filters = {}) {
+    const places = await getPlaces(filters);
+    return db.districts.map((d) => ({
+      district: d,
+      places: places.filter((p) => p.districtId === d.id),
+    }));
   }
 
   return {
     currentSeasonCode,
-    getCategories,
     getSeasons,
-    getRegionsGeoJSON,
-    getRegionById,
-    searchRegions,
-    getRegionSpecies,
-    getAllSpecies,
+    getDistricts,
+    getCategories,
+    getLaws,
+    getSpecies,
     getSpeciesById,
-    getRegionsBySpecies,
+    getPlaces,
+    getPlaceById,
+    getFeaturedPlace,
+    getPlacesByDistrict,
   };
 })();
 

@@ -3,67 +3,50 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Крепкая Охота — карта</title>
-
-  <!-- Leaflet (карта) -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
+  <title>Крепкая Охота — главная</title>
+  <meta name="description" content="Крепкая Охота — гид по рыбалке и охоте в Ростове-на-Дону: места по районам, сезоны, законы." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
-  <!-- ── Шапка + навигация (заглушки страниц) ── -->
-  <header class="site-header">
-    <a class="logo" href="index.html">🦌 Крепкая&nbsp;Охота</a>
-    <nav class="site-nav">
-      <a href="index.html" class="active">Карта</a>
-      <a href="pages/species.html">Виды</a>
-      <a href="pages/favorites.html">Избранное</a>
-      <a href="pages/about.html">О проекте</a>
-    </nav>
-  </header>
+  <header id="appHeader" class="site-header"></header>
 
-  <!-- ── Панель управления ── -->
-  <section class="controls">
-    <div class="control mode-toggle">
-      <span class="control-label">Режим:</span>
-      <button data-mode="hunting" class="active">🏹 Охота</button>
-      <button data-mode="fishing">🎣 Рыбалка</button>
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-inner">
+        <h1>Привет, охотник!</h1>
+        <p>«Крепкая Охота» — твой проводник в мир дикой природы Ростова-на-Дону.
+           Выбирай место, сверяйся с сезоном и законом — и вперёд за трофеями.</p>
+        <a class="btn btn-primary" href="pages/map.html">Выбрать место</a>
+      </div>
+    </section>
+
+    <div class="container">
+      <!-- Место дня -->
+      <section class="section">
+        <div class="section-head"><h2>Место дня</h2></div>
+        <article id="featured" class="featured"></article>
+      </section>
+
+      <!-- Проверенные места рядом -->
+      <section class="section">
+        <div class="section-head">
+          <h2>Проверенные места рядом</h2>
+          <a class="link-more" href="pages/map.html">Все на карте →</a>
+        </div>
+        <div id="placesGrid" class="card-grid"></div>
+      </section>
     </div>
-
-    <div class="control">
-      <label class="control-label" for="seasonSelect">Сезон:</label>
-      <select id="seasonSelect"></select>
-    </div>
-
-    <div class="control">
-      <label class="control-label" for="speciesFilter">Фильтр по виду:</label>
-      <select id="speciesFilter"></select>
-      <button id="clearFilter" class="ghost" title="Сбросить фильтр">✕</button>
-    </div>
-
-    <div class="control search">
-      <label class="control-label" for="searchInput">Поиск региона:</label>
-      <input id="searchInput" type="text" placeholder="Напр. Ростов" autocomplete="off" />
-      <ul id="searchResults" class="search-results"></ul>
-    </div>
-  </section>
-
-  <!-- ── Карта + боковая панель ── -->
-  <main class="layout">
-    <div id="map" class="map"></div>
-    <aside id="panel" class="panel"></aside>
   </main>
 
-  <footer class="site-footer">
-    Учебная практика · «Крепкая Охота» · прототип дня 2 ·
-    данные демонстрационные.
-  </footer>
+  <footer id="appFooter" class="site-footer"></footer>
 
-  <!-- Порядок важен: данные → слой доступа → карта → приложение -->
   <script src="js/data.js"></script>
   <script src="js/api.js"></script>
-  <script src="js/map.js"></script>
-  <script src="js/app.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/home.js"></script>
 </body>
 </html>

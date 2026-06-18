@@ -1,6 +1,0 @@
-[
-  { "id": 1, "code": "spring", "title": "Весна", "monthFrom": 3, "monthTo": 5 },
-  { "id": 2, "code": "summer", "title": "Лето", "monthFrom": 6, "monthTo": 8 },
-  { "id": 3, "code": "autumn", "title": "Осень", "monthFrom": 9, "monthTo": 11 },
-  { "id": 4, "code": "winter", "title": "Зима", "monthFrom": 12, "monthTo": 2 }
-]

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Крепкая Охота — гиды</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+  <header id="appHeader" class="site-header"></header>
+  <main>
+    <div class="container">
+      <div class="stub" id="stub"></div>
+    </div>
+  </main>
+  <footer id="appFooter" class="site-footer"></footer>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/api.js"></script>
+  <script src="../js/components.js"></script>
+  <script>
+    UI.init('guides');
+    document.getElementById('stub').innerHTML =
+      UI.icon('compass') +
+      '<h1>Гиды</h1><p>Раздел с проверенными гидами по рыбалке и охоте появится в следующем обновлении. ' +
+      'Здесь можно будет выбрать сопровождающего, посмотреть маршруты и отзывы.</p>';
+  </script>
+</body>
+</html>

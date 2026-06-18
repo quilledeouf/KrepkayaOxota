@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Крепкая Охота — законы</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+  <header id="appHeader" class="site-header"></header>
+
+  <main>
+    <div class="container section">
+      <h1 class="page-title">Законы и правила</h1>
+      <p class="page-sub">Сроки запретов, нормы вылова и ответственность за нарушения в Ростовской области.</p>
+
+      <div class="section-head"><h2>Нерестовые запреты</h2></div>
+      <div id="banGrid" class="ban-grid"></div>
+
+      <div class="section-head"><h2>Нормы и ограничения</h2></div>
+      <div id="normGrid" class="norm-grid"></div>
+
+      <div class="section-head"><h2>Таксы за ущерб (за экземпляр)</h2></div>
+      <table class="tax-table">
+        <thead>
+          <tr><th>Вид</th><th style="text-align:right">Обычно</th><th style="text-align:right">В запрет (×2)</th></tr>
+        </thead>
+        <tbody id="taxBody"></tbody>
+      </table>
+
+      <div class="section-head" style="margin-top:28px"><h2>Ответственность</h2></div>
+      <div id="liabilityGrid" class="liability-grid"></div>
+
+      <p class="source-note" id="sourceNote"></p>
+    </div>
+  </main>
+
+  <footer id="appFooter" class="site-footer"></footer>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/api.js"></script>
+  <script src="../js/components.js"></script>
+  <script src="../js/laws.js"></script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Крепкая Охота — карта</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+  <header id="appHeader" class="site-header"></header>
+
+  <main>
+    <div class="map-layout">
+      <aside class="map-sidebar">
+        <h3>Фильтры</h3>
+        <div class="input-wrap" style="margin-top:14px">
+          <span id="searchIcon"></span>
+          <input id="search" class="input" type="text" placeholder="Поиск места или района…" autocomplete="off" />
+        </div>
+
+        <div class="filter-block">
+          <div class="filter-label">Сезон</div>
+          <div class="toggle-grid" id="seasonToggles"></div>
+        </div>
+
+        <div class="filter-block">
+          <div class="filter-label">Тип деятельности</div>
+          <div class="toggle-grid" id="typeToggles"></div>
+        </div>
+
+        <div class="filter-block">
+          <div class="filter-label">Район</div>
+          <select id="districtSelect" class="input"></select>
+        </div>
+
+        <p class="result-count" id="resultCount"></p>
+      </aside>
+
+      <div class="map-pane">
+        <div id="map" class="map"></div>
+      </div>
+    </div>
+  </main>
+
+  <script src="../js/data.js"></script>
+  <script src="../js/api.js"></script>
+  <script src="../js/components.js"></script>
+  <script src="../js/map.js"></script>
+</body>
+</html>
