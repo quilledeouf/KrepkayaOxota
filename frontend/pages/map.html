@@ -6,8 +6,6 @@
   <title>Крепкая Охота — карта</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <link rel="stylesheet" href="../css/styles.css" />
 </head>
 <body>
@@ -19,22 +17,28 @@
         <h3>Фильтры</h3>
         <div class="input-wrap" style="margin-top:14px">
           <span id="searchIcon"></span>
-          <input id="search" class="input" type="text" placeholder="Поиск места или района…" autocomplete="off" />
+          <input id="search" class="input" type="text" placeholder="Поиск места или тега…" autocomplete="off" />
         </div>
 
         <div class="filter-block">
           <div class="filter-label">Сезон</div>
           <div class="toggle-grid" id="seasonToggles"></div>
         </div>
-
         <div class="filter-block">
           <div class="filter-label">Тип деятельности</div>
           <div class="toggle-grid" id="typeToggles"></div>
         </div>
-
         <div class="filter-block">
-          <div class="filter-label">Район</div>
-          <select id="districtSelect" class="input"></select>
+          <div class="filter-label">Кто водится</div>
+          <div class="toggle-grid" id="speciesToggles"></div>
+        </div>
+        <div class="filter-block">
+          <div class="filter-label">Инфраструктура</div>
+          <div class="toggle-grid" id="infraToggles"></div>
+        </div>
+        <div class="filter-block">
+          <div class="filter-label">Доступность</div>
+          <div class="toggle-grid" id="reachToggles"></div>
         </div>
 
         <p class="result-count" id="resultCount"></p>
@@ -42,10 +46,16 @@
 
       <div class="map-pane">
         <div id="map" class="map"></div>
+        <div class="map-legend">
+          <div><i style="background:#1a9d4e"></i> Открыто, разрешено</div>
+          <div><i style="background:#d8412f"></i> Запретная зона</div>
+          <div><i style="background:#f0820f"></i> Требуется лицензия</div>
+        </div>
       </div>
     </div>
   </main>
 
+  <script src="../js/config.js"></script>
   <script src="../js/data.js"></script>
   <script src="../js/api.js"></script>
   <script src="../js/components.js"></script>

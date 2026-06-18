@@ -5,14 +5,14 @@
  * 2. Впишите свои ключи (config.js уже в .gitignore — в репозиторий не попадёт).
  *
  * Где взять ключи:
- *  • GOOGLE_MAPS_KEY  — Google Cloud Console → APIs & Services → включить
- *    «Maps JavaScript API» → Credentials → Create API key. Желательно ограничить
- *    ключ по HTTP-referrer (домену).
+ *  • YANDEX_MAPS_KEY  — developer.tech.yandex.ru/services → сервис
+ *    «JavaScript API и HTTP Геокодер» → создать ключ (бесплатно, по Яндекс-аккаунту,
+ *    без карты). Карта работает и без ключа в режиме разработки.
  *  • SUPABASE_URL и SUPABASE_ANON_KEY — supabase.com → ваш проект →
  *    Project Settings → API → «Project URL» и «anon public» ключ.
  */
 window.APP_CONFIG = {
-  GOOGLE_MAPS_KEY: 'ВСТАВЬТЕ_КЛЮЧ_GOOGLE_MAPS',
+  YANDEX_MAPS_KEY: '',
   SUPABASE_URL: 'https://ВАШ_ПРОЕКТ.supabase.co',
   SUPABASE_ANON_KEY: 'ВСТАВЬТЕ_ANON_KEY',
 };
