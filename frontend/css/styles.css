@@ -372,7 +372,7 @@ body[data-mode="fish"] {
 }
 
 /* Логотип-картинка */
-.logo-img { width: 34px; height: 34px; border-radius: 50%; object-fit: cover; background: #0c1f14; flex: none; }
+.logo-img { width: 36px; height: 36px; flex: none; display: block; }
 .brand-sm .logo-img { width: 26px; height: 26px; }
 
 /* Переключатель режима (Охота/Рыбалка) в шапке */
