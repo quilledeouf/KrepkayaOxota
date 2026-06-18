@@ -24,6 +24,10 @@ const Api = (() => {
   const getDistricts = () => tick(db.districts);
   const getCategories = () => tick(db.categories);
   const getLaws = () => tick(db.laws);
+  const getTrophies = () => tick(db.trophies);
+  const getGuides = () => tick(db.guides);
+  const getProfile = () => tick(db.profile);
+  const speciesPhoto = (cat) => db.speciesPhotos[cat] || '';
 
   // ── Виды (Справочник, F6) ────────────────────────────────
   function getSpecies({ cat, q } = {}) {
@@ -94,6 +98,10 @@ const Api = (() => {
     getPlaceById,
     getFeaturedPlace,
     getPlacesByDistrict,
+    getTrophies,
+    getGuides,
+    getProfile,
+    speciesPhoto,
   };
 })();
 

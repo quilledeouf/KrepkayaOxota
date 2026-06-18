@@ -1,13 +1,18 @@
 /*
- * components.js — общие части интерфейса: иконки (SVG), шапка, подвал, утилиты.
- * Подключается на каждой странице первым из UI-скриптов. Иконки — в стиле Lucide
- * (по рекомендации UI/UX Pro Max: SVG-иконки вместо эмодзи).
+ * components.js — общие части интерфейса: иконки (SVG), шапка с переключателем
+ * режима (Охота/Рыбалка), подвал, утилиты. Подключается первым из UI-скриптов.
+ * Режим хранится в localStorage и меняет тему (см. body[data-mode] в styles.css).
  */
 const UI = (() => {
-  // Базовый путь: страницы в /pages/ ссылаются на корень через ../
   const inPages = location.pathname.replace(/\\/g, '/').includes('/pages/');
   const base = inPages ? '../' : '';
   const link = (p) => base + p;
+
+  // Режим/тема: 'hunt' | 'fish'
+  function getMode() { return localStorage.getItem('ko-mode') || 'hunt'; }
+  function applyMode(m) { document.body.dataset.mode = m; }
+  // Применяем сразу, чтобы не было «мигания» темы
+  if (document.body) applyMode(getMode());
 
   // ── Иконки (24×24, stroke=currentColor) ──────────────────
   const paths = {
@@ -29,46 +34,55 @@ const UI = (() => {
     check: '<path d="M5 12.5 9.5 17 19 6.5"/>',
     x: '<path d="M6 6l12 12M18 6 6 18"/>',
     chevron: '<path d="m6 9 6 6 6-6"/>',
-    leaf: '<path d="M4 20c8 0 16-5 16-16 0 0-12-2-16 4-2.4 3.6 0 8 0 12z"/><path d="M4 20c2-6 6-9 10-11"/>',
+    shield: '<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/>',
+    target: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/>',
   };
   const icon = (name, cls = '') =>
     `<svg class="icon ${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths[name] || ''}</svg>`;
 
-  const logoMark = () =>
-    `<svg class="logo-mark" viewBox="0 0 40 40" aria-hidden="true">
-       <circle cx="20" cy="20" r="19" fill="#16321f" stroke="#3d8456" stroke-width="2"/>
-       <path d="M13 27c0-5 2-9 7-9s7 4 7 9" fill="none" stroke="#e7f0e9" stroke-width="2" stroke-linecap="round"/>
-       <path d="M20 18V9M20 12l-4-3M20 12l4-3M16 9l-3-1M24 9l3-1" fill="none" stroke="#f0a020" stroke-width="2" stroke-linecap="round"/>
-     </svg>`;
+  const logoImg = () => `<img class="logo-img" src="${link('assets/img/logo.png')}" alt="Логотип Крепкая Охота" />`;
 
   const NAV = [
-    { href: 'index.html', label: 'Главная', icon: 'home', key: 'home' },
-    { href: 'pages/map.html', label: 'Карта', icon: 'map', key: 'map' },
-    { href: 'pages/handbook.html', label: 'Справочник', icon: 'book', key: 'handbook' },
-    { href: 'pages/laws.html', label: 'Законы', icon: 'scale', key: 'laws' },
-    { href: 'pages/guides.html', label: 'Гиды', icon: 'compass', key: 'guides' },
-    { href: 'pages/profile.html', label: 'Профиль', icon: 'user', key: 'profile' },
+    { href: 'index.html', label: 'Главная', key: 'home' },
+    { href: 'pages/map.html', label: 'Карта', key: 'map' },
+    { href: 'pages/handbook.html', label: 'Справочник', key: 'handbook' },
+    { href: 'pages/laws.html', label: 'Законы', key: 'laws' },
+    { href: 'pages/guides.html', label: 'Гиды', key: 'guides' },
   ];
 
   function renderHeader(active) {
     const host = document.getElementById('appHeader');
     if (!host) return;
     const items = NAV.map(
-      (n) =>
-        `<a href="${link(n.href)}" class="nav-link ${n.key === active ? 'active' : ''}">
-           ${icon(n.icon)}<span>${n.label}</span>
-         </a>`
+      (n) => `<a href="${link(n.href)}" class="nav-link ${n.key === active ? 'active' : ''}">${n.label}</a>`
     ).join('');
+    const mode = getMode();
     host.innerHTML = `
       <div class="header-inner">
-        <a class="brand" href="${link('index.html')}">${logoMark()}<span>Крепкая Охота</span></a>
+        <a class="brand" href="${link('index.html')}">${logoImg()}<span>Крепкая Охота</span></a>
         <nav class="nav" aria-label="Основная навигация">${items}</nav>
         <div class="header-actions">
+          <div class="mode-toggle-h" role="group" aria-label="Режим">
+            <button class="mode-dot fish" data-mode="fish" aria-pressed="${mode === 'fish'}" title="Рыбалка">${icon('fish')}</button>
+            <button class="mode-dot hunt" data-mode="hunt" aria-pressed="${mode === 'hunt'}" title="Охота">${icon('paw')}</button>
+          </div>
           <button class="icon-btn" aria-label="Уведомления">${icon('bell')}</button>
           <a class="avatar" href="${link('pages/profile.html')}" aria-label="Профиль">АК</a>
           <button class="burger" aria-label="Меню" aria-expanded="false">${icon('filter')}</button>
         </div>
       </div>`;
+
+    // Переключатель режима
+    host.querySelectorAll('.mode-dot').forEach((btn) =>
+      btn.addEventListener('click', () => {
+        const m = btn.dataset.mode;
+        localStorage.setItem('ko-mode', m);
+        applyMode(m);
+        host.querySelectorAll('.mode-dot').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.mode === m)));
+        document.dispatchEvent(new CustomEvent('modechange', { detail: m }));
+      })
+    );
+    // Бургер-меню
     const burger = host.querySelector('.burger');
     const nav = host.querySelector('.nav');
     burger.addEventListener('click', () => {
@@ -82,44 +96,33 @@ const UI = (() => {
     if (!host) return;
     host.innerHTML = `
       <div class="footer-inner">
-        <span class="brand-sm">${logoMark()} Крепкая Охота</span>
+        <span class="brand-sm">${logoImg()} Крепкая Охота</span>
         <span class="muted">Учебная практика · Ростов-на-Дону · данные ознакомительные</span>
       </div>`;
   }
 
-  // ── Утилиты отрисовки ────────────────────────────────────
+  // ── Утилиты ──────────────────────────────────────────────
   function stars(rating) {
     const full = Math.round(rating);
     let out = '';
     for (let i = 1; i <= 5; i++) out += icon('star', i <= full ? 'star-on' : 'star-off');
     return `<span class="stars">${out}</span>`;
   }
-
   function seasonBars(seasons) {
-    const order = [
-      ['spring', 'Вес'],
-      ['summer', 'Лет'],
-      ['autumn', 'Осе'],
-      ['winter', 'Зим'],
-    ];
+    const order = [['spring', 'Вес'], ['summer', 'Лет'], ['autumn', 'Осе'], ['winter', 'Зим']];
     return `<div class="season-bars" role="img" aria-label="Доступность по сезонам">${order
-      .map(
-        ([k, lbl]) =>
-          `<span class="sbar ${seasons[k] === 'open' ? 'ok' : 'bad'}" title="${lbl}: ${
-            seasons[k] === 'open' ? 'открыто' : 'закрыто'
-          }">${lbl}</span>`
-      )
+      .map(([k, lbl]) => `<span class="sbar ${seasons[k] === 'open' ? 'ok' : 'bad'}" title="${lbl}: ${seasons[k] === 'open' ? 'открыто' : 'закрыто'}">${lbl}</span>`)
       .join('')}</div>`;
   }
-
   const chip = (text, cls = '') => `<span class="chip ${cls}">${text}</span>`;
 
   function init(active) {
+    applyMode(getMode());
     renderHeader(active);
     renderFooter();
   }
 
-  return { icon, logoMark, init, renderHeader, renderFooter, stars, seasonBars, chip, link };
+  return { icon, logoImg, init, getMode, renderHeader, renderFooter, stars, seasonBars, chip, link };
 })();
 
 window.UI = UI;

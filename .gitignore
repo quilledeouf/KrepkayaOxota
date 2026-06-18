@@ -30,3 +30,6 @@ coverage/
 .cache/
 tmp/
 .claude/
+
+# ── Локальные ключи (НЕ коммитить) ──
+frontend/js/config.js

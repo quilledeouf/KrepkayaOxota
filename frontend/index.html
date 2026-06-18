@@ -14,24 +14,21 @@
   <header id="appHeader" class="site-header"></header>
 
   <main>
-    <!-- Hero -->
     <section class="hero">
       <div class="hero-inner">
-        <h1>Привет, охотник!</h1>
+        <h1 id="heroHi">Привет, охотник!</h1>
         <p>«Крепкая Охота» — твой проводник в мир дикой природы Ростова-на-Дону.
-           Выбирай место, сверяйся с сезоном и законом — и вперёд за трофеями.</p>
-        <a class="btn btn-primary" href="pages/map.html">Выбрать место</a>
+           Выбирай маршрут и вперёд, за трофеями!</p>
+        <a class="btn btn-primary" href="pages/map.html">Выбрать маршрут</a>
       </div>
     </section>
 
     <div class="container">
-      <!-- Место дня -->
       <section class="section">
         <div class="section-head"><h2>Место дня</h2></div>
         <article id="featured" class="featured"></article>
       </section>
 
-      <!-- Проверенные места рядом -->
       <section class="section">
         <div class="section-head">
           <h2>Проверенные места рядом</h2>
@@ -39,11 +36,22 @@
         </div>
         <div id="placesGrid" class="card-grid"></div>
       </section>
+
+      <section class="section">
+        <div class="section-head"><h2>Трофеи недели</h2></div>
+        <div id="trophiesGrid" class="card-grid"></div>
+      </section>
+
+      <section class="section">
+        <div class="section-head"><h2>Полезное</h2></div>
+        <div id="usefulGrid" class="useful-grid"></div>
+      </section>
     </div>
   </main>
 
   <footer id="appFooter" class="site-footer"></footer>
 
+  <script src="js/config.js"></script>
   <script src="js/data.js"></script>
   <script src="js/api.js"></script>
   <script src="js/components.js"></script>

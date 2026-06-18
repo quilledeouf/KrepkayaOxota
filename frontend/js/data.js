@@ -182,4 +182,44 @@ window.APP_DATA = {
     ],
     source: 'Постановление Правительства РФ № 1321 от 03.11.2018; Правила рыболовства Азово-Черноморского бассейна. Данные ознакомительные.',
   },
+
+  // Трофеи недели (главная)
+  trophies: [
+    { species: 'Сом', weight: '113 кг', place: 'Цимлянское вдхр.', date: '17 мая' },
+    { species: 'Щука', weight: '11.4 кг', place: 'Зелёный остров', date: '12 июня' },
+    { species: 'Сазан', weight: '8.2 кг', place: 'Левбердон', date: '3 июня' },
+  ],
+
+  // Гиды
+  guides: [
+    { id: 1, name: 'Алексей Щуков', rating: 4.5, info: '15 лет на Дону. Спиннинг, троллинг, судак и щука.', contact: '+7 (900) 000-00-01' },
+    { id: 2, name: 'Игорь Сомов', rating: 4.8, info: 'Трофейная рыбалка на сома и сазана, своя лодка.', contact: '+7 (900) 000-00-02' },
+    { id: 3, name: 'Пётр Гусев', rating: 4.6, info: 'Охота на водоплавающую дичь, обученные собаки.', contact: '+7 (900) 000-00-03' },
+    { id: 4, name: 'Сергей Карпов', rating: 4.7, info: 'Зимняя рыбалка: мормышка, балансир, безмотылка.', contact: '+7 (900) 000-00-04' },
+    { id: 5, name: 'Дмитрий Лосев', rating: 4.4, info: 'Охота на кабана и косулю по путёвкам и лицензиям.', contact: '+7 (900) 000-00-05' },
+    { id: 6, name: 'Николай Уткин', rating: 4.9, info: 'Гид по угодьям левобережья, помощь новичкам.', contact: '+7 (900) 000-00-06' },
+  ],
+
+  // Демо-профиль (до подключения Supabase Auth)
+  profile: {
+    name: 'Александр Карпов', initials: 'АК', level: 12, levelTitle: 'Опытный охотник',
+    stats: { trips: 67, species: 23, km: 523, achievements: 6 },
+    achievements: [
+      { title: 'Первая кровь', emoji: '🎯', color: '#f3766e' },
+      { title: 'Трофейный мастер', emoji: '🏆', color: '#f4d35e' },
+      { title: 'Ночной волк', emoji: '🐺', color: '#8b8fd6' },
+    ],
+    diary: [
+      { place: 'Зелёный остров', date: '12 июня', species: 'Щука 11.4 кг' },
+      { place: 'Цимлянское водохранилище', date: '17 мая', species: 'Сом 113 кг' },
+      { place: 'Река Маныч', date: '25 марта', species: 'Окунь 3 кг' },
+    ],
+  },
+
+  // Фото-заглушки для справочника по категориям
+  speciesPhotos: {
+    fish: 'https://images.unsplash.com/photo-1535591273668-578e31182c4f?auto=format&fit=crop&w=600&q=60',
+    animal: 'https://images.unsplash.com/photo-1484406566174-9da000fda645?auto=format&fit=crop&w=600&q=60',
+    bird: 'https://images.unsplash.com/photo-1452570053594-1b985d6ea890?auto=format&fit=crop&w=600&q=60',
+  },
 };
