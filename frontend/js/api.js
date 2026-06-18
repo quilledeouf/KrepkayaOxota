@@ -26,7 +26,6 @@ const Api = (() => {
   const getLaws = () => tick(db.laws);
   const getTrophies = () => tick(db.trophies);
   const getGuides = () => tick(db.guides);
-  const getProfile = () => tick(db.profile);
   const speciesPhoto = (cat) => db.speciesPhotos[cat] || '';
 
   // ── Виды (Справочник, F6) ────────────────────────────────
@@ -100,7 +99,6 @@ const Api = (() => {
     getPlacesByDistrict,
     getTrophies,
     getGuides,
-    getProfile,
     speciesPhoto,
   };
 })();

@@ -216,23 +216,7 @@ window.APP_DATA = {
     { id: 6, name: 'Николай Уткин', rating: 4.9, info: 'Гид по угодьям левобережья, помощь новичкам.', contact: '+7 (900) 000-00-06' },
   ],
 
-  // Демо-профиль (до подключения Supabase Auth)
-  profile: {
-    name: 'Александр Карпов', initials: 'АК', level: 12, levelTitle: 'Опытный охотник',
-    stats: { trips: 67, species: 23, km: 523, achievements: 6 },
-    achievements: [
-      { title: 'Первая кровь', emoji: '🎯', color: '#f3766e' },
-      { title: 'Трофейный мастер', emoji: '🏆', color: '#f4d35e' },
-      { title: 'Ночной волк', emoji: '🐺', color: '#8b8fd6' },
-    ],
-    diary: [
-      { place: 'Зелёный остров', date: '12 июня', species: 'Щука 11.4 кг' },
-      { place: 'Цимлянское водохранилище', date: '17 мая', species: 'Сом 113 кг' },
-      { place: 'Река Маныч', date: '25 марта', species: 'Окунь 3 кг' },
-    ],
-  },
-
-  // Фото-заглушки для справочника по категориям
+  // Фото-заглушки для справочника по категориям (фолбэк, если AVIF не загрузился)
   speciesPhotos: {
     fish: 'https://images.unsplash.com/photo-1535591273668-578e31182c4f?auto=format&fit=crop&w=600&q=60',
     animal: 'https://images.unsplash.com/photo-1484406566174-9da000fda645?auto=format&fit=crop&w=600&q=60',

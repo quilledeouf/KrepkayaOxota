@@ -27,7 +27,10 @@
     const btn = e.target.querySelector('button[type=submit]');
     busy(btn, true); setMsg('Вход…', true);
     try {
-      await SB.signIn({ email: $('email').value.trim(), password: $('password').value });
+      const email = $('email').value.trim();
+      const { user } = await SB.signIn({ email, password: $('password').value });
+      const name = (user && user.user_metadata && user.user_metadata.full_name) || email;
+      UI.setUser({ name, initials: UI.initials(name) });
       setMsg('Готово! Перенаправляем…', true);
       location.href = 'profile.html';
     } catch (err) {
@@ -47,6 +50,8 @@
         username: ($('email').value.split('@')[0] || '').trim(),
       });
       if (data.session) {
+        const name = $('fullname').value.trim() || $('email').value.trim();
+        UI.setUser({ name, initials: UI.initials(name) });
         setMsg('Аккаунт создан! Перенаправляем…', true);
         location.href = 'profile.html';
       } else {

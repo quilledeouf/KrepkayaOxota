@@ -36,15 +36,16 @@
     const list = await Api.getSpecies(state);
     const host = el('cards');
     if (!list.length) { host.innerHTML = `<p class="muted">Ничего не найдено.</p>`; return; }
-    const photo = Api.speciesPhoto(state.cat);
     host.innerHTML = list
       .map((s) => {
         const meta = s.taxRub
           ? `<span class="tax">Такса: ${s.taxRub.toLocaleString('ru-RU')} ₽</span>`
           : s.note ? `<span class="muted" style="font-size:.8rem">${s.note}</span>` : '';
+        const photo = UI.link(`assets/img/species/${s.id}.avif`);
         return `
         <article class="species-card cat-${s.cat}">
-          <div class="species-photo" style="background-image:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.25)),url('${photo}')">
+          <div class="species-photo">
+            <img src="${photo}" alt="${s.name}" loading="lazy" onerror="this.style.display='none'">
             <span class="sp-cat">${UI.icon(CAT[s.cat].icon)} ${CAT[s.cat].label}</span>
           </div>
           <div class="species-body">

@@ -8,6 +8,15 @@ const UI = (() => {
   const base = inPages ? '../' : '';
   const link = (p) => base + p;
 
+  // Текущий пользователь (лёгкая запись для шапки; основное — в Supabase)
+  function currentUser() { try { return JSON.parse(localStorage.getItem('ko-user') || 'null'); } catch (e) { return null; } }
+  function setUser(u) { if (u) localStorage.setItem('ko-user', JSON.stringify(u)); else localStorage.removeItem('ko-user'); }
+  function initials(name) {
+    if (!name) return '';
+    const parts = name.trim().split(/[\s@._-]+/).filter(Boolean);
+    return ((parts[0] || '')[0] + (parts[1] ? parts[1][0] : (parts[0] || '')[1] || '')).toUpperCase();
+  }
+
   // Режим/тема: 'hunt' | 'fish'
   function getMode() { return localStorage.getItem('ko-mode') || 'hunt'; }
   function applyMode(m) { document.body.dataset.mode = m; }
@@ -40,29 +49,7 @@ const UI = (() => {
   const icon = (name, cls = '') =>
     `<svg class="icon ${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths[name] || ''}</svg>`;
 
-  // Логотип «Крепкая Охота» — герб (лес + перекрещённые ружья), векторный, резкий.
-  const logoImg = () => `
-    <svg class="logo-img" viewBox="0 0 64 64" role="img" aria-label="Логотип Крепкая Охота">
-      <circle cx="32" cy="32" r="30" fill="#15311e" stroke="#eaf2ec" stroke-width="2.3"/>
-      <circle cx="32" cy="32" r="25.5" fill="none" stroke="#eaf2ec" stroke-width="0.8" opacity=".4"/>
-      <path d="M20 30 l6 -9 6 9 z" fill="#eaf2ec" opacity=".3"/>
-      <path d="M30 30 l7 -10 7 10 z" fill="#eaf2ec" opacity=".3"/>
-      <g fill="#eaf2ec">
-        <path d="M32 13 l4.5 8 h-9 z"/>
-        <path d="M32 18 l6 9 h-12 z"/>
-        <path d="M24 21 l3.2 6 h-6.4 z"/>
-        <path d="M40 21 l3.2 6 h-6.4 z"/>
-        <rect x="19" y="27" width="26" height="1.5" rx=".7"/>
-      </g>
-      <g stroke="#eaf2ec" stroke-width="2.4" stroke-linecap="round">
-        <line x1="22" y1="50" x2="52" y2="20"/>
-        <line x1="42" y1="50" x2="12" y2="20"/>
-      </g>
-      <g fill="#f0a020">
-        <path d="M20 51 l5 -3 1.8 2.6 -5 3 z"/>
-        <path d="M44 51 l-5 -3 -1.8 2.6 5 3 z"/>
-      </g>
-    </svg>`;
+  const logoImg = () => `<img class="logo-img" src="${link('assets/img/logo.png')}" alt="Логотип Крепкая Охота" />`;
 
   const NAV = [
     { href: 'index.html', label: 'Главная', key: 'home' },
@@ -79,6 +66,7 @@ const UI = (() => {
       (n) => `<a href="${link(n.href)}" class="nav-link ${n.key === active ? 'active' : ''}">${n.label}</a>`
     ).join('');
     const mode = getMode();
+    const user = currentUser();
     host.innerHTML = `
       <div class="header-inner">
         <a class="brand" href="${link('index.html')}">${logoImg()}<span>Крепкая Охота</span></a>
@@ -89,7 +77,9 @@ const UI = (() => {
             <button class="mode-dot hunt" data-mode="hunt" aria-pressed="${mode === 'hunt'}" title="Охота">${icon('paw')}</button>
           </div>
           <button class="icon-btn" aria-label="Уведомления">${icon('bell')}</button>
-          <a class="avatar" href="${link('pages/profile.html')}" aria-label="Профиль">АК</a>
+          ${user
+            ? `<a class="avatar" href="${link('pages/profile.html')}" aria-label="Профиль" title="${user.name || 'Профиль'}">${user.initials || initials(user.name) || 'У'}</a>`
+            : `<a class="avatar avatar-guest" href="${link('pages/login.html')}" aria-label="Войти" title="Войти">${icon('user')}</a>`}
           <button class="burger" aria-label="Меню" aria-expanded="false">${icon('filter')}</button>
         </div>
       </div>`;
@@ -144,7 +134,7 @@ const UI = (() => {
     renderFooter();
   }
 
-  return { icon, logoImg, init, getMode, renderHeader, renderFooter, stars, seasonBars, chip, link };
+  return { icon, logoImg, init, getMode, renderHeader, renderFooter, stars, seasonBars, chip, link, currentUser, setUser, initials };
 })();
 
 window.UI = UI;

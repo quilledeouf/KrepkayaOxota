@@ -125,8 +125,10 @@ img { max-width: 100%; display: block; }
 .icon-btn:hover { background: rgba(255, 255, 255, .18); }
 .avatar {
   display: grid; place-items: center; width: 38px; height: 38px; border-radius: 50%;
-  background: var(--accent); color: #fff; font-weight: 700; font-size: .85rem;
+  background: var(--accent); color: #fff; font-weight: 700; font-size: .85rem; text-decoration: none;
 }
+.avatar.avatar-guest { background: rgba(255, 255, 255, .14); }
+.avatar.avatar-guest .icon { width: 20px; height: 20px; }
 .burger { display: none; }
 
 /* ============================================================
@@ -372,7 +374,7 @@ body[data-mode="fish"] {
 }
 
 /* Логотип-картинка */
-.logo-img { width: 36px; height: 36px; flex: none; display: block; }
+.logo-img { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; background: #15311e; flex: none; display: block; }
 .brand-sm .logo-img { width: 26px; height: 26px; }
 
 /* Переключатель режима (Охота/Рыбалка) в шапке */
@@ -466,8 +468,9 @@ body[data-mode="fish"] {
 @media (max-width: 720px) { .two-col { grid-template-columns: 1fr; } }
 
 /* Справочник: фото-карточка вида */
-.species-photo { height: 150px; background: linear-gradient(135deg, var(--brand-2), var(--brand)); background-size: cover; background-position: center; position: relative; }
-.species-photo .sp-cat { position: absolute; top: 10px; left: 10px; background: rgba(255,255,255,.92); color: var(--brand); border-radius: 999px; padding: 3px 10px; font-size: .72rem; font-weight: 700; display: inline-flex; gap: 5px; align-items: center; }
+.species-photo { height: 160px; background: linear-gradient(135deg, var(--brand-2), var(--brand)); position: relative; overflow: hidden; }
+.species-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.species-photo .sp-cat { position: absolute; top: 10px; left: 10px; z-index: 1; background: rgba(255,255,255,.92); color: var(--brand); border-radius: 999px; padding: 3px 10px; font-size: .72rem; font-weight: 700; display: inline-flex; gap: 5px; align-items: center; }
 .species-photo .sp-cat .icon { width: 13px; height: 13px; }
 .species-card .species-body h4 { margin: 0; font-size: 1.05rem; }
 .species-card .species-body .latin { color: var(--muted); font-style: italic; font-size: .8rem; margin-top: -2px; }
