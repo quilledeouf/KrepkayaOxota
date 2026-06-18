@@ -94,6 +94,17 @@ alter table public.places  enable row level security;
 alter table public.species enable row level security;
 alter table public.guides  enable row level security;
 
+-- Postgres не поддерживает CREATE POLICY IF NOT EXISTS — сначала дропаем, потом создаём
+-- (делает скрипт безопасным для повторного запуска).
+drop policy if exists "public read places"  on public.places;
+drop policy if exists "public read species" on public.species;
+drop policy if exists "public read guides"  on public.guides;
+drop policy if exists "own profile read"    on public.profiles;
+drop policy if exists "own profile upsert"  on public.profiles;
+drop policy if exists "own profile update"  on public.profiles;
+drop policy if exists "own favorites"       on public.favorites;
+drop policy if exists "own trips"           on public.trips;
+
 create policy "public read places"  on public.places  for select using (true);
 create policy "public read species" on public.species for select using (true);
 create policy "public read guides"  on public.guides  for select using (true);
