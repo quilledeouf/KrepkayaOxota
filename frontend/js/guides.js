@@ -1,4 +1,4 @@
-/* guides.js — Гиды: карточки проводников (имя, рейтинг, информация, запись). */
+/* гиды */
 (() => {
   document.addEventListener('DOMContentLoaded', init);
 

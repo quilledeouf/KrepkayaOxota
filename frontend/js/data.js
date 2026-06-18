@@ -1,19 +1,17 @@
 /*
- * data.js — данные прототипа «Крепкая Охота» (Ростов-на-Дону).
- *
- * Данные актуализированы по открытым источникам (июнь 2026):
- *  - нерестовый запрет: 01.04–31.05 (Ростовская обл.); тарань/плотва 15.03–30.04;
- *  - суточная норма вылова: 5 кг;
- *  - таксы ущерба — Постановление Правительства РФ № 1321 от 03.11.2018;
- *  - ответственность — КоАП ст. 8.37, УК ст. 256.
- * Носит ознакомительный характер — перед выездом сверяйтесь с актуальными
- * приказами Росрыболовства и региональными правилами охоты.
- *
- * На MVP данные встроены в страницу (window.APP_DATA). На этапе 2 заменяются
- * REST API (см. docs/API.md). UI берёт данные только через api.js.
+ * data.js — данные для всей этой залупкино
+⠀⠀⢀⣀⠤⠿⢤⢖⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⡔⢩⠂⠀⠒⠗⠈⠀⠉⠢⠄⣀⠠⠤⠄⠒⢖⡒⢒⠂⠤⢄⠀⠀⠀⠀
+⠇⠤⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠀⠀⠈⠀⠈⠈⡨⢀⠡⡪⠢⡀⠀
+⠈⠒⠀⠤⠤⣄⡆⡂⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠢⠀⢕⠱⠀
+⠀⠀⠀⠀⠀⠈⢳⣐⡐⠐⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠀⠁⠇
+⠀⠀⠀⠀⠀⠀⠀⠑⢤⢁⠀⠆⠀⠀⠀⠀⠀⢀⢰⠀⠀⠀⡀⢄⡜⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠘⡦⠄⡷⠢⠤⠤⠤⠤⢬⢈⡇⢠⣈⣰⠎⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⣃⢸⡇⠀⠀⠀⠀⠀⠈⢪⢀⣺⡅⢈⠆⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠶⡿⠤⠚⠁⠀⠀⠀⢀⣠⡤⢺⣥⠟⢡⠃⠀
  */
 window.APP_DATA = {
-  // Районы Ростова-на-Дону (F: «места, сгруппированные по районам»)
+  // Районы Ростова
   districts: [
     { id: 1, name: 'Ворошиловский' },
     { id: 2, name: 'Железнодорожный' },
@@ -25,7 +23,7 @@ window.APP_DATA = {
     { id: 8, name: 'Советский' },
   ],
 
-  // Сезоны (F4)
+  // Сезоны
   seasons: [
     { id: 1, code: 'spring', title: 'Весна', short: 'Вес', monthFrom: 3, monthTo: 5 },
     { id: 2, code: 'summer', title: 'Лето', short: 'Лет', monthFrom: 6, monthTo: 8 },
@@ -33,17 +31,13 @@ window.APP_DATA = {
     { id: 4, code: 'winter', title: 'Зима', short: 'Зим', monthFrom: 12, monthTo: 2 },
   ],
 
-  // Категории справочника
+  // Категории
   categories: [
     { id: 'fish', title: 'Рыбы', icon: 'fish' },
     { id: 'animal', title: 'Животные', icon: 'paw' },
     { id: 'bird', title: 'Птицы', icon: 'bird' },
   ],
 
-  /*
-   * Виды. seasons: статус по сезонам ('open' | 'closed').
-   * taxRub — такса ущерба за экземпляр (рыба, Пост. № 1321). Для дичи — null.
-   */
   species: [
     // ── Рыбы ──
     { id: 11, cat: 'fish', name: 'Судак', latin: 'Sander lucioperca', size: 'до 8 кг', taxRub: 3305,
@@ -79,8 +73,6 @@ window.APP_DATA = {
     { id: 21, cat: 'fish', name: 'Пеленгас', latin: 'Planiliza haematocheila', size: 'до 7 кг', taxRub: null,
       desc: 'Дальневосточный вселенец, ловится на отмелях на нереиса (морского червя).',
       seasons: { spring: 'closed', summer: 'open', autumn: 'open', winter: 'open' }, note: 'Такса по региональному перечню.' },
-
-    // ── Животные (дичь) ──
     { id: 31, cat: 'animal', name: 'Кабан', latin: 'Sus scrofa', size: 'до 200 кг', taxRub: null,
       desc: 'Крупный зверь пойменных лесов и тростников. Охота по путёвке и лицензии.',
       seasons: { spring: 'closed', summer: 'open', autumn: 'open', winter: 'open' }, note: 'Только по разрешению.' },
@@ -97,7 +89,7 @@ window.APP_DATA = {
       desc: 'Вселенец пойм и плавней, активен в сумерках.',
       seasons: { spring: 'closed', summer: 'closed', autumn: 'open', winter: 'open' }, note: null },
 
-    // ── Птицы (пернатая дичь) ──
+    //
     { id: 41, cat: 'bird', name: 'Кряква', latin: 'Anas platyrhynchos', size: 'до 1.5 кг', taxRub: null,
       desc: 'Самая массовая утка. Летне-осенняя охота на воде.',
       seasons: { spring: 'closed', summer: 'open', autumn: 'open', winter: 'closed' }, note: 'Открытие — 3-я суббота августа.' },
@@ -118,12 +110,6 @@ window.APP_DATA = {
       seasons: { spring: 'closed', summer: 'closed', autumn: 'open', winter: 'closed' }, note: null },
   ],
 
-  /*
-   * Места рыбалки и охоты в Ростове-на-Дону и окрестностях.
-   * districtId → districts[]; speciesIds → species[]; type: 'fishing'|'hunting'|'both'.
-   * coords [lat, lon]; access: free|paid; legality: open|license|restricted (легенда карты);
-   * infra: parking|pier|toilet|camping; reach: car|foot|boat.
-   */
   places: [
     { id: 1, name: 'Зелёный остров', districtId: 7, type: 'fishing', coords: [47.205, 39.695],
       distanceKm: 5, rating: 4.7, reviews: 124, access: 'free', legality: 'open',
@@ -172,10 +158,6 @@ window.APP_DATA = {
       desc: 'Степная балка с лесополосами — заяц, куропатка, перепел. Ходовая осенняя охота (по путёвке).' },
   ],
 
-  /*
-   * Законы: нормы, нерестовые запреты и ответственность.
-   * taxes тянутся из species[].taxRub.
-   */
   laws: {
     spawningBans: [
       { title: 'Общий нерестовый запрет', period: '1 апреля — 31 мая', area: 'Водоёмы Ростовской области', note: 'Запрет любительского лова в большинстве водоёмов.' },
@@ -199,14 +181,13 @@ window.APP_DATA = {
     source: 'Постановление Правительства РФ № 1321 от 03.11.2018; Правила рыболовства Азово-Черноморского бассейна. Данные ознакомительные.',
   },
 
-  // Трофеи недели (главная)
+  // Трофеи
   trophies: [
     { species: 'Сом', weight: '113 кг', place: 'Цимлянское вдхр.', date: '17 мая' },
     { species: 'Щука', weight: '11.4 кг', place: 'Зелёный остров', date: '12 июня' },
     { species: 'Сазан', weight: '8.2 кг', place: 'Левбердон', date: '3 июня' },
   ],
 
-  // Гиды
   guides: [
     { id: 1, name: 'Алексей Щуков', rating: 4.5, info: '15 лет на Дону. Спиннинг, троллинг, судак и щука.', contact: '+7 (900) 000-00-01' },
     { id: 2, name: 'Игорь Сомов', rating: 4.8, info: 'Трофейная рыбалка на сома и сазана, своя лодка.', contact: '+7 (900) 000-00-02' },
@@ -216,7 +197,6 @@ window.APP_DATA = {
     { id: 6, name: 'Николай Уткин', rating: 4.9, info: 'Гид по угодьям левобережья, помощь новичкам.', contact: '+7 (900) 000-00-06' },
   ],
 
-  // Фото-заглушки для справочника по категориям (фолбэк, если AVIF не загрузился)
   speciesPhotos: {
     fish: 'https://images.unsplash.com/photo-1535591273668-578e31182c4f?auto=format&fit=crop&w=600&q=60',
     animal: 'https://images.unsplash.com/photo-1484406566174-9da000fda645?auto=format&fit=crop&w=600&q=60',

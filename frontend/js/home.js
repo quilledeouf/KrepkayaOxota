@@ -1,4 +1,3 @@
-/* home.js — главная: Место дня, проверенные места, трофеи недели, полезное. */
 (() => {
   const PHOTOS = [
     'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=900&q=60',

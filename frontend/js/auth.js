@@ -1,4 +1,3 @@
-/* auth.js — вход и регистрация через Supabase Auth (login.html, register.html). */
 (() => {
   const $ = (id) => document.getElementById(id);
   document.addEventListener('DOMContentLoaded', init);

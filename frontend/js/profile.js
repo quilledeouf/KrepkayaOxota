@@ -1,4 +1,3 @@
-/* profile.js — реальный профиль пользователя Supabase (без демо-данных). */
 (() => {
   const $ = (id) => document.getElementById(id);
   document.addEventListener('DOMContentLoaded', init);
@@ -81,7 +80,7 @@
   }
 
   function renderAchievements() {
-    // Достижения начисляются по мере выездов — пока пусто.
+    // Достижения начисляются по мере выездов пока ну пусто, ну прям вообще пусто пусто.
     $('achievements').innerHTML = `<p class="muted">Достижения появятся после первых выездов и добытых трофеев.</p>`;
   }
 

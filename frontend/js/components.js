@@ -1,14 +1,13 @@
 /*
- * components.js — общие части интерфейса: иконки (SVG), шапка с переключателем
- * режима (Охота/Рыбалка), подвал, утилиты. Подключается первым из UI-скриптов.
- * Режим хранится в localStorage и меняет тему (см. body[data-mode] в styles.css).
+ * components.js — общие части интерфейса
+ * режима (Охота/Рыбалка), подвал, утилиты. Подключается первым из UI-скриптов и прочей осталой херни 
  */
 const UI = (() => {
   const inPages = location.pathname.replace(/\\/g, '/').includes('/pages/');
   const base = inPages ? '../' : '';
   const link = (p) => base + p;
 
-  // Текущий пользователь (лёгкая запись для шапки; основное — в Supabase)
+  // Текущий пользователь
   function currentUser() { try { return JSON.parse(localStorage.getItem('ko-user') || 'null'); } catch (e) { return null; } }
   function setUser(u) { if (u) localStorage.setItem('ko-user', JSON.stringify(u)); else localStorage.removeItem('ko-user'); }
   function initials(name) {
@@ -17,13 +16,13 @@ const UI = (() => {
     return ((parts[0] || '')[0] + (parts[1] ? parts[1][0] : (parts[0] || '')[1] || '')).toUpperCase();
   }
 
-  // Режим/тема: 'hunt' | 'fish'
+  // Режим/тема:
   function getMode() { return localStorage.getItem('ko-mode') || 'hunt'; }
   function applyMode(m) { document.body.dataset.mode = m; }
   // Применяем сразу, чтобы не было «мигания» темы
   if (document.body) applyMode(getMode());
 
-  // ── Иконки (24×24, stroke=currentColor) ──────────────────
+  // ── Иконки 24 на 24 тунг тунг сахура
   const paths = {
     home: '<path d="M3 9.8 12 3l9 6.8"/><path d="M5 10v10h14V10"/>',
     map: '<path d="M9 18l-6 3V6l6-3 6 3 6-3v15l-6 3-6-3z"/><path d="M9 3v15"/><path d="M15 6v15"/>',
@@ -94,7 +93,7 @@ const UI = (() => {
         document.dispatchEvent(new CustomEvent('modechange', { detail: m }));
       })
     );
-    // Бургер-меню
+    // Бургер-меню, омерика омерика
     const burger = host.querySelector('.burger');
     const nav = host.querySelector('.nav');
     burger.addEventListener('click', () => {
@@ -113,7 +112,7 @@ const UI = (() => {
       </div>`;
   }
 
-  // ── Утилиты ──────────────────────────────────────────────
+  //Утилиты
   function stars(rating) {
     const full = Math.round(rating);
     let out = '';

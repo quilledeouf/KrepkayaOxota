@@ -1,4 +1,4 @@
-/* handbook.js — Справочник: вкладки Рыбы/Животные/Птицы, поиск, карточки с фото. */
+/* справочкииииии. */
 (() => {
   const state = { cat: 'fish', q: '' };
   const CAT = { fish: { icon: 'fish', label: 'Рыба' }, animal: { icon: 'paw', label: 'Зверь' }, bird: { icon: 'bird', label: 'Птица' } };

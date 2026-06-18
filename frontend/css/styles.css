@@ -1,8 +1,3 @@
-/* ============================================================
-   Крепкая Охота — дизайн-система (UI/UX Pro Max, vanilla стек)
-   Палитра: лес (тёмно-зелёный) + охотничий оранжевый акцент.
-   Шрифт: Inter. Иконки: SVG. Анимации: CSS 150–200ms.
-   ============================================================ */
 :root {
   --green-900: #12281a;
   --green-800: #16321f;
@@ -11,28 +6,23 @@
   --green-500: #3d8456;
   --green-100: #e7f0e9;
   --green-050: #f1f6f2;
-
-  /* Бренд/акцент — переопределяются темой (см. body[data-mode]) */
-  --brand: #16321f;        /* цвет шапки (Охота) */
+  --brand: #16321f;
   --brand-2: #1f4429;
-  --accent: #f0820f;       /* охотничий оранжевый CTA */
+  --accent: #f0820f;
   --accent-600: #d96e08;
   --accent-100: #ffedd5;
   --mode-hunt: #f0820f;
   --mode-fish: #18a9c9;
-
   --ink: #16201b;
   --muted: #6b7770;
   --line: #e3e9e3;
   --bg: #f5f7f3;
   --card: #ffffff;
-
   --ok: #1a9d4e;
   --ok-100: #dff3e6;
   --bad: #d8412f;
   --bad-100: #fbe4e1;
   --warn: #c97a06;
-
   --r-sm: 8px;
   --r-md: 12px;
   --r-lg: 18px;
@@ -83,12 +73,8 @@ img { max-width: 100%; display: block; }
 .btn-ghost:hover { background: var(--green-050); }
 .btn-block { width: 100%; justify-content: center; }
 
-/* ── Доступность: видимый фокус ── */
 :focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
 
-/* ============================================================
-   ШАПКА
-   ============================================================ */
 .site-header {
   position: sticky; top: 0; z-index: 50;
   background: var(--brand); color: #eaf2ec;
@@ -131,9 +117,6 @@ img { max-width: 100%; display: block; }
 .avatar.avatar-guest .icon { width: 20px; height: 20px; }
 .burger { display: none; }
 
-/* ============================================================
-   ОБЩЕЕ ДЛЯ СТРАНИЦ
-   ============================================================ */
 main { flex: 1; width: 100%; }
 .section { padding: 28px 0; }
 .section-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
@@ -142,7 +125,6 @@ main { flex: 1; width: 100%; }
 .page-title { font-size: 1.8rem; margin: 0 0 4px; }
 .page-sub { color: var(--muted); margin: 0 0 22px; }
 
-/* ── Чипы / теги ── */
 .chip {
   display: inline-flex; align-items: center; gap: 5px;
   padding: 3px 10px; border-radius: 999px; font-size: .78rem; font-weight: 600;
@@ -151,13 +133,11 @@ main { flex: 1; width: 100%; }
 .chip.solid { background: var(--green-600); color: #fff; border-color: transparent; }
 .chip.warn { background: var(--accent-100); color: var(--accent-600); border-color: transparent; }
 
-/* ── Звёзды рейтинга ── */
 .stars { display: inline-flex; gap: 1px; }
 .stars .icon { width: 15px; height: 15px; }
 .star-on { color: var(--accent); fill: var(--accent); }
 .star-off { color: #cfd8d0; fill: #eef2ee; }
 
-/* ── Сезонные индикаторы ── */
 .season-bars { display: flex; gap: 4px; }
 .sbar {
   flex: 1; text-align: center; font-size: .68rem; font-weight: 700; letter-spacing: .02em;
@@ -166,9 +146,6 @@ main { flex: 1; width: 100%; }
 .sbar.ok { background: var(--ok); }
 .sbar.bad { background: var(--bad); opacity: .85; }
 
-/* ============================================================
-   ГЛАВНАЯ
-   ============================================================ */
 .hero { background: transparent; }
 .hero-inner { max-width: 680px; margin: 0 auto; padding: 34px 20px 6px; text-align: center; }
 .hero h1 { font-size: 1.5rem; margin: 0 0 8px; letter-spacing: -.01em; }
@@ -191,7 +168,6 @@ main { flex: 1; width: 100%; }
 .featured .chips { display: flex; gap: 7px; margin-bottom: 18px; flex-wrap: wrap; }
 .featured .chip { background: rgba(255,255,255,.16); color: #fff; border-color: transparent; backdrop-filter: blur(4px); }
 
-/* ── Сетка карточек мест ── */
 .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 18px; }
 .place-card {
   background: var(--card); border: 1px solid var(--line); border-radius: var(--r-lg);
@@ -222,9 +198,6 @@ main { flex: 1; width: 100%; }
 .place-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: auto; }
 .place-tags .chip { font-size: .72rem; padding: 2px 8px; }
 
-/* ============================================================
-   КАРТА
-   ============================================================ */
 .map-layout { display: grid; grid-template-columns: 320px 1fr; height: calc(100vh - var(--header-h)); }
 .map-sidebar { background: var(--card); border-right: 1px solid var(--line); padding: 20px; overflow: auto; }
 .map-sidebar h3 { font-size: 1.2rem; margin: 0 0 4px; }
@@ -252,9 +225,6 @@ select.input { padding-left: 12px; appearance: none; cursor: pointer; }
 .popup-title { font-weight: 700; margin-bottom: 2px; }
 .popup-tags { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 6px; }
 
-/* ============================================================
-   СПРАВОЧНИК
-   ============================================================ */
 .tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--line); margin-bottom: 20px; }
 .tab {
   padding: 12px 18px; border: none; background: none; font: inherit; font-weight: 600;
@@ -290,10 +260,6 @@ select.input { padding-left: 12px; appearance: none; cursor: pointer; }
 .legend { display: flex; gap: 16px; font-size: .8rem; color: var(--muted); margin-bottom: 18px; }
 .legend span { display: inline-flex; align-items: center; gap: 6px; }
 .legend i { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
-
-/* ============================================================
-   ЗАКОНЫ
-   ============================================================ */
 .ban-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; margin-bottom: 28px; }
 .ban-card {
   border: 1px solid var(--accent); background: linear-gradient(135deg, #fff8ef, #fff);
@@ -303,44 +269,31 @@ select.input { padding-left: 12px; appearance: none; cursor: pointer; }
 .ban-card h4 { margin: 0; }
 .ban-card .area { color: var(--muted); font-size: .88rem; }
 .ban-card .note { font-size: .85rem; margin-top: 8px; }
-
 .norm-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 28px; }
 .norm-card { background: var(--card); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 18px; box-shadow: var(--shadow-sm); }
 .norm-card .norm-value { font-size: 1.5rem; font-weight: 800; color: var(--green-700); }
 .norm-card .norm-label { font-weight: 600; margin-top: 4px; }
 .norm-card .note { font-size: .82rem; color: var(--muted); margin-top: 6px; }
-
 .tax-table { width: 100%; border-collapse: collapse; background: var(--card); border-radius: var(--r-lg); overflow: hidden; box-shadow: var(--shadow-sm); border: 1px solid var(--line); }
 .tax-table th, .tax-table td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--line); }
 .tax-table th { background: var(--green-050); font-size: .82rem; text-transform: uppercase; letter-spacing: .03em; color: var(--muted); }
 .tax-table tr:last-child td { border-bottom: none; }
 .tax-table .amount { font-weight: 700; color: var(--bad); text-align: right; white-space: nowrap; }
 .tax-table .amount2 { color: var(--accent-600); text-align: right; white-space: nowrap; }
-
 .liability-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; margin: 28px 0 16px; }
 .liability-card { background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--bad); border-radius: var(--r-md); padding: 18px; box-shadow: var(--shadow-sm); }
 .liability-card .code { font-size: .8rem; color: var(--muted); font-weight: 600; }
 .liability-card .penalty { font-size: 1.3rem; font-weight: 800; color: var(--bad); margin: 6px 0; }
 .source-note { font-size: .82rem; color: var(--muted); margin-top: 20px; padding: 14px; background: var(--green-050); border-radius: var(--r-md); }
-
-/* ── Заглушка (Гиды/Профиль) ── */
 .stub { text-align: center; padding: 80px 20px; }
 .stub .icon { width: 56px; height: 56px; color: var(--green-500); margin: 0 auto 16px; }
 .stub h1 { margin: 0 0 8px; }
 .stub p { color: var(--muted); max-width: 460px; margin: 0 auto; }
-
-/* ============================================================
-   ПОДВАЛ
-   ============================================================ */
 .site-footer { background: var(--green-900); color: #aebfb2; margin-top: 40px; }
 .footer-inner { max-width: var(--maxw); margin: 0 auto; padding: 22px 20px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: .85rem; }
 .brand-sm { display: inline-flex; align-items: center; gap: 8px; color: #fff; font-weight: 700; }
 .brand-sm .logo-mark { width: 26px; height: 26px; }
 .muted { color: var(--muted); }
-
-/* ============================================================
-   АДАПТИВ
-   ============================================================ */
 @media (max-width: 920px) {
   .nav {
     position: absolute; top: var(--header-h); left: 0; right: 0;
@@ -357,14 +310,9 @@ select.input { padding-left: 12px; appearance: none; cursor: pointer; }
   .hero h1 { font-size: 1.8rem; }
   .featured h3 { font-size: 1.5rem; }
 }
-
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
-
-/* ============================================================
-   ТЕМА «РЫБАЛКА» (переключается в шапке)
-   ============================================================ */
 body[data-mode="fish"] {
   --brand: #0f6b78;
   --brand-2: #0c5562;
@@ -372,12 +320,8 @@ body[data-mode="fish"] {
   --accent-600: #1391ad;
   --accent-100: #d6f1f7;
 }
-
-/* Логотип-картинка */
 .logo-img { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; background: #15311e; flex: none; display: block; }
 .brand-sm .logo-img { width: 26px; height: 26px; }
-
-/* Переключатель режима (Охота/Рыбалка) в шапке */
 .mode-toggle-h { display: inline-flex; gap: 6px; align-items: center; }
 .mode-dot { width: 34px; height: 34px; border-radius: 50%; border: none; display: grid; place-items: center;
   cursor: pointer; color: #fff; transition: transform .15s, box-shadow .15s, opacity .15s; }
@@ -387,8 +331,6 @@ body[data-mode="fish"] {
 .mode-dot[aria-pressed="false"] { opacity: .4; }
 .mode-dot[aria-pressed="true"] { box-shadow: 0 0 0 2px #fff; opacity: 1; }
 .mode-dot:hover { transform: translateY(-1px); }
-
-/* Главная: трофеи недели + полезное */
 .trophy-card { background: var(--card); border: 1px solid var(--line); border-radius: var(--r-lg); overflow: hidden; box-shadow: var(--shadow-sm); }
 .trophy-media { height: 120px; background: linear-gradient(135deg, var(--brand-2), var(--brand)); background-size: cover; background-position: center; }
 .trophy-body { padding: 12px 14px; }
@@ -402,13 +344,9 @@ body[data-mode="fish"] {
 .useful-ico .icon { width: 22px; height: 22px; }
 .useful-card h4 { margin: 0 0 2px; font-size: 1rem; }
 .useful-card .muted { font-size: .82rem; }
-
-/* Карта: легенда */
 .map-legend { position: absolute; right: 16px; bottom: 24px; z-index: 500; background: #fff; border-radius: 12px; box-shadow: var(--shadow-md); padding: 12px 14px; font-size: .82rem; }
 .map-legend div { display: flex; align-items: center; gap: 8px; margin: 4px 0; }
 .map-legend i { width: 11px; height: 11px; border-radius: 50%; }
-
-/* Законы: чекер законности + штрафы */
 .checker { background: var(--card); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 22px; box-shadow: var(--shadow-sm); max-width: 720px; margin-bottom: 30px; }
 .checker h3 { margin: 0 0 16px; }
 .checker .row { display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-end; }
@@ -425,8 +363,6 @@ body[data-mode="fish"] {
 .fine-row .f-name { font-weight: 600; }
 .fine-row .f-sub { font-size: .82rem; color: var(--muted); }
 .fine-row .f-amount { font-size: 1.3rem; font-weight: 800; color: var(--bad); white-space: nowrap; }
-
-/* Профиль */
 .profile-card { background: var(--card); border: 1px solid var(--line); border-radius: var(--r-xl); padding: 24px; box-shadow: var(--shadow-md); display: flex; gap: 24px; align-items: center; flex-wrap: wrap; margin-bottom: 28px; }
 .profile-ava { width: 120px; height: 120px; border-radius: 50%; background: var(--accent); color: #fff; display: grid; place-items: center; font-size: 2.6rem; font-weight: 800; flex: none; }
 .profile-name { font-size: 1.8rem; font-weight: 800; margin: 0; }
@@ -443,16 +379,12 @@ body[data-mode="fish"] {
 .diary-thumb { width: 46px; height: 46px; border-radius: 10px; background: var(--brand); background-size: cover; background-position: center; flex: none; }
 .diary-row h4 { margin: 0; font-size: .95rem; }
 .diary-row .muted { font-size: .78rem; }
-
-/* Гиды */
 .guide-card { background: var(--card); border: 1px solid var(--line); border-radius: var(--r-lg); overflow: hidden; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; transition: transform .16s, box-shadow .16s; }
 .guide-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
 .guide-media { height: 120px; background: linear-gradient(135deg, var(--brand-2), var(--brand)); background-size: cover; background-position: center; position: relative; display: flex; align-items: flex-end; }
 .guide-media .g-name { color: #fff; font-weight: 700; padding: 10px 14px; width: 100%; display: flex; justify-content: space-between; background: linear-gradient(transparent, rgba(0,0,0,.55)); }
 .guide-body { padding: 16px; display: flex; flex-direction: column; gap: 14px; flex: 1; }
 .guide-body .muted { font-size: .85rem; }
-
-/* Вход / Регистрация / Приветствие */
 .auth-wrap { max-width: 620px; margin: 0 auto; padding: 50px 20px; text-align: center; }
 .auth-wrap h1 { font-size: 2.2rem; margin: 0 0 10px; }
 .auth-wrap p { color: var(--muted); margin: 0 auto 28px; max-width: 480px; }
@@ -464,13 +396,11 @@ body[data-mode="fish"] {
 .auth-msg { margin-top: 12px; font-size: .9rem; }
 .auth-msg.err { color: var(--bad); }
 .auth-msg.ok { color: var(--ok); }
-
 @media (max-width: 720px) { .two-col { grid-template-columns: 1fr; } }
-
-/* Справочник: фото-карточка вида */
 .species-photo { height: 160px; background: linear-gradient(135deg, var(--brand-2), var(--brand)); position: relative; overflow: hidden; }
 .species-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .species-photo .sp-cat { position: absolute; top: 10px; left: 10px; z-index: 1; background: rgba(255,255,255,.92); color: var(--brand); border-radius: 999px; padding: 3px 10px; font-size: .72rem; font-weight: 700; display: inline-flex; gap: 5px; align-items: center; }
 .species-photo .sp-cat .icon { width: 13px; height: 13px; }
 .species-card .species-body h4 { margin: 0; font-size: 1.05rem; }
 .species-card .species-body .latin { color: var(--muted); font-style: italic; font-size: .8rem; margin-top: -2px; }
+

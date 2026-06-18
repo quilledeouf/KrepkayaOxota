@@ -1,9 +1,3 @@
-/*
- * api.js — единый слой доступа к данным (см. CONTRIBUTING.md).
- * UI берёт данные только отсюда. Сейчас источник — window.APP_DATA (data.js);
- * на этапе 2 тела функций заменяются на fetch() к REST API (docs/API.md).
- * Все функции возвращают Promise, чтобы переход на сеть не ломал вызывающий код.
- */
 const Api = (() => {
   const db = window.APP_DATA;
   const tick = (v) => Promise.resolve(v);
@@ -19,7 +13,7 @@ const Api = (() => {
     return 'winter';
   }
 
-  // ── Справочники ──────────────────────────────────────────
+  // Справочники
   const getSeasons = () => tick(db.seasons);
   const getDistricts = () => tick(db.districts);
   const getCategories = () => tick(db.categories);
@@ -28,7 +22,7 @@ const Api = (() => {
   const getGuides = () => tick(db.guides);
   const speciesPhoto = (cat) => db.speciesPhotos[cat] || '';
 
-  // ── Виды (Справочник, F6) ────────────────────────────────
+  //  Виды
   function getSpecies({ cat, q } = {}) {
     let list = db.species.slice();
     if (cat) list = list.filter((s) => s.cat === cat);
@@ -40,8 +34,7 @@ const Api = (() => {
   }
   const getSpeciesById = (id) => tick(speciesById(Number(id)));
 
-  // ── Места (F1, F3, F7) ───────────────────────────────────
-  /** Места с раскрытыми районом и видами. Фильтры: тип, сезон, район, поиск. */
+  // ── Места
   function getPlaces({ type, season, districtId, q, speciesId } = {}) {
     let list = db.places.slice();
     if (type && type !== 'all') list = list.filter((p) => p.type === type || p.type === 'both');
@@ -62,7 +55,6 @@ const Api = (() => {
     return tick(p ? expandPlace(p) : null);
   }
 
-  /** Место дня — самое высокооценённое. */
   function getFeaturedPlace() {
     const top = db.places.slice().sort((a, b) => b.rating - a.rating)[0];
     return tick(expandPlace(top));
@@ -76,7 +68,7 @@ const Api = (() => {
     };
   }
 
-  /** Места, сгруппированные по районам (выбор пользователя). */
+  /** Места, сгруппированные*/
   async function getPlacesByDistrict(filters = {}) {
     const places = await getPlaces(filters);
     return db.districts.map((d) => ({

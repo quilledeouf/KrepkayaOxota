@@ -1,4 +1,3 @@
-/* map.js — страница «Карта» на Яндекс.Картах: спутник/гибрид, фильтры, маркеры. */
 (() => {
   const state = { q: '', season: null, activity: 'all', species: null, infra: new Set(), reach: new Set() };
   let map, markers, placemarks = {}, allPlaces = [];
@@ -24,8 +23,6 @@
     bindSearch();
     loadYandex(initMap);
   }
-
-  // ── Конструкторы фильтров ────────────────────────────────
   function buildSeasonToggles() {
     const seasons = [['spring', 'Весна'], ['summer', 'Лето'], ['autumn', 'Осень'], ['winter', 'Зима']];
     const host = el('seasonToggles');
@@ -84,7 +81,7 @@
     el('search').addEventListener('input', (e) => { clearTimeout(t); t = setTimeout(() => { state.q = e.target.value; refresh(); }, 200); });
   }
 
-  // ── Фильтрация ───────────────────────────────────────────
+  //Фильтрация
   function applyFilters() {
     return allPlaces.filter((p) => {
       if (state.q) {
@@ -102,7 +99,7 @@
     });
   }
 
-  // ── Яндекс.Карты ─────────────────────────────────────────
+  // Яндекс
   function loadYandex(cb) {
     if (window.ymaps) return ymaps.ready(cb);
     const key = (window.APP_CONFIG || {}).YANDEX_MAPS_KEY;

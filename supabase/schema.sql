@@ -1,10 +1,4 @@
--- ============================================================
---  Крепкая Охота — схема для Supabase (PostgreSQL)
---  Запуск: Supabase → SQL Editor → New query → вставить → Run.
---  Аутентификация — встроенная (auth.users). Здесь — прикладные таблицы.
--- ============================================================
-
--- ── Профиль пользователя (1:1 с auth.users) ────────────────
+--Профиль пользователя
 create table if not exists public.profiles (
   id          uuid primary key references auth.users(id) on delete cascade,
   full_name   text,
@@ -18,7 +12,7 @@ create table if not exists public.profiles (
   created_at  timestamptz default now()
 );
 
--- ── Места (рыбалка/охота) ──────────────────────────────────
+--Места
 create table if not exists public.places (
   id          bigserial primary key,
   name        text not null,
@@ -37,7 +31,7 @@ create table if not exists public.places (
   species_ids int[]
 );
 
--- ── Виды (рыбы/животные/птицы) ─────────────────────────────
+--Виды
 create table if not exists public.species (
   id        int primary key,
   cat       text check (cat in ('fish','animal','bird')),
@@ -52,7 +46,7 @@ create table if not exists public.species (
   note      text
 );
 
--- ── Избранные места пользователя ───────────────────────────
+--Избранные места пользователя
 create table if not exists public.favorites (
   id        bigserial primary key,
   user_id   uuid references auth.users(id) on delete cascade,
@@ -61,7 +55,7 @@ create table if not exists public.favorites (
   unique (user_id, place_id)
 );
 
--- ── Дневник выездов ────────────────────────────────────────
+--Дневник выездов
 create table if not exists public.trips (
   id        bigserial primary key,
   user_id   uuid references auth.users(id) on delete cascade,
@@ -72,7 +66,7 @@ create table if not exists public.trips (
   photo_url text
 );
 
--- ── Гиды ───────────────────────────────────────────────────
+-- uиды 
 create table if not exists public.guides (
   id     bigserial primary key,
   name   text not null,
@@ -81,20 +75,17 @@ create table if not exists public.guides (
   photo_url text,
   contact text
 );
-
--- ============================================================
 --  Row Level Security (RLS)
--- ============================================================
 alter table public.profiles  enable row level security;
 alter table public.favorites enable row level security;
 alter table public.trips     enable row level security;
 
--- Справочные таблицы (places, species, guides) — публичное чтение.
+-- Справочные таблицы public
 alter table public.places  enable row level security;
 alter table public.species enable row level security;
 alter table public.guides  enable row level security;
 
--- Postgres не поддерживает CREATE POLICY IF NOT EXISTS — сначала дропаем, потом создаём
+-- Postgres не поддерживает. сначала дропаем, потом создаём
 -- (делает скрипт безопасным для повторного запуска).
 drop policy if exists "public read places"  on public.places;
 drop policy if exists "public read species" on public.species;
@@ -109,16 +100,16 @@ create policy "public read places"  on public.places  for select using (true);
 create policy "public read species" on public.species for select using (true);
 create policy "public read guides"  on public.guides  for select using (true);
 
--- Профиль: владелец видит и правит свой.
+--владелец видит и правит свой.
 create policy "own profile read"   on public.profiles for select using (auth.uid() = id);
 create policy "own profile upsert" on public.profiles for insert with check (auth.uid() = id);
 create policy "own profile update" on public.profiles for update using (auth.uid() = id);
 
--- Избранное и дневник: только свои записи.
+-- Избранное и дневник
 create policy "own favorites" on public.favorites for all using (auth.uid() = user_id) with check (auth.uid() = user_id);
 create policy "own trips"     on public.trips     for all using (auth.uid() = user_id) with check (auth.uid() = user_id);
 
--- ── Автосоздание профиля при регистрации ───────────────────
+--Автосоздание профиля при регистрации
 create or replace function public.handle_new_user()
 returns trigger language plpgsql security definer as $$
 begin
