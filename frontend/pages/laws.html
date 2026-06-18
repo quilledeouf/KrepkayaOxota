@@ -14,24 +14,40 @@
   <main>
     <div class="container section">
       <h1 class="page-title">Законы и правила</h1>
-      <p class="page-sub">Сроки запретов, нормы вылова и ответственность за нарушения в Ростовской области.</p>
+      <p class="page-sub">Проверьте законность охоты и рыбалки в вашем регионе.</p>
 
-      <div class="section-head"><h2>Нерестовые запреты</h2></div>
+      <div class="checker">
+        <h3>Чекер законности</h3>
+        <div class="row">
+          <div class="field">
+            <label for="actSel">Вид деятельности</label>
+            <select id="actSel" class="input">
+              <option value="fishing">Рыбалка</option>
+              <option value="hunting">Охота</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="monthSel">Дата</label>
+            <select id="monthSel" class="input"></select>
+          </div>
+          <div class="field" style="flex:0 0 auto">
+            <button id="checkBtn" class="btn btn-primary">Проверить</button>
+          </div>
+        </div>
+        <div id="verdict"></div>
+      </div>
+
+      <div class="section-head"><h2>Штрафы за нарушения</h2></div>
+      <div id="fineList" class="fine-list"></div>
+
+      <div class="section-head" style="margin-top:28px"><h2>Нерестовые запреты</h2></div>
       <div id="banGrid" class="ban-grid"></div>
-
-      <div class="section-head"><h2>Нормы и ограничения</h2></div>
-      <div id="normGrid" class="norm-grid"></div>
 
       <div class="section-head"><h2>Таксы за ущерб (за экземпляр)</h2></div>
       <table class="tax-table">
-        <thead>
-          <tr><th>Вид</th><th style="text-align:right">Обычно</th><th style="text-align:right">В запрет (×2)</th></tr>
-        </thead>
+        <thead><tr><th>Вид</th><th style="text-align:right">Обычно</th><th style="text-align:right">В запрет (×2)</th></tr></thead>
         <tbody id="taxBody"></tbody>
       </table>
-
-      <div class="section-head" style="margin-top:28px"><h2>Ответственность</h2></div>
-      <div id="liabilityGrid" class="liability-grid"></div>
 
       <p class="source-note" id="sourceNote"></p>
     </div>
@@ -39,6 +55,7 @@
 
   <footer id="appFooter" class="site-footer"></footer>
 
+  <script src="../js/config.js"></script>
   <script src="../js/data.js"></script>
   <script src="../js/api.js"></script>
   <script src="../js/components.js"></script>

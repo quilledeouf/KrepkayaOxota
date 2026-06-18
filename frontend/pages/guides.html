@@ -10,22 +10,21 @@
 </head>
 <body>
   <header id="appHeader" class="site-header"></header>
+
   <main>
-    <div class="container">
-      <div class="stub" id="stub"></div>
+    <div class="container section">
+      <h1 class="page-title">Гиды</h1>
+      <p class="page-sub">Проверенные проводники с опытом и отзывами.</p>
+      <div id="guidesGrid" class="card-grid"></div>
     </div>
   </main>
+
   <footer id="appFooter" class="site-footer"></footer>
 
+  <script src="../js/config.js"></script>
   <script src="../js/data.js"></script>
   <script src="../js/api.js"></script>
   <script src="../js/components.js"></script>
-  <script>
-    UI.init('guides');
-    document.getElementById('stub').innerHTML =
-      UI.icon('compass') +
-      '<h1>Гиды</h1><p>Раздел с проверенными гидами по рыбалке и охоте появится в следующем обновлении. ' +
-      'Здесь можно будет выбрать сопровождающего, посмотреть маршруты и отзывы.</p>';
-  </script>
+  <script src="../js/guides.js"></script>
 </body>
 </html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Крепкая Охота — регистрация</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+  <header id="appHeader" class="site-header"></header>
+
+  <main>
+    <div class="auth-wrap">
+      <h1>Создать аккаунт</h1>
+      <form id="registerForm" class="auth-card">
+        <div class="field">
+          <label for="fullname">Имя</label>
+          <input id="fullname" class="input" type="text" placeholder="как вас зовут" required autocomplete="name" />
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" class="input" type="email" placeholder="введите email" required autocomplete="email" />
+        </div>
+        <div class="field">
+          <label for="password">Пароль</label>
+          <input id="password" class="input" type="password" placeholder="минимум 6 символов" required minlength="6" autocomplete="new-password" />
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Создать</button>
+        <p id="authMsg" class="auth-msg"></p>
+      </form>
+      <p style="margin-top:18px">Есть аккаунт? <a class="auth-link" href="login.html">Войти</a></p>
+    </div>
+  </main>
+
+  <footer id="appFooter" class="site-footer"></footer>
+
+  <script src="../js/config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../js/components.js"></script>
+  <script src="../js/supabase.js"></script>
+  <script src="../js/auth.js"></script>
+</body>
+</html>
