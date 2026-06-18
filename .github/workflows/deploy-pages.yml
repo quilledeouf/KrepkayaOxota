@@ -1,0 +1,56 @@
+name: Deploy site to GitHub Pages
+
+on:
+  push:
+    branches: ["feature/dev-day2-foundation"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Apply config from secrets (if provided)
+        env:
+          SB_URL: ${{ secrets.SUPABASE_URL }}
+          SB_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+          YA_KEY: ${{ secrets.YANDEX_MAPS_KEY }}
+        run: |
+          if [ -n "$SB_URL" ]; then
+            cat > frontend/js/config.js <<EOF
+          window.APP_CONFIG = {
+            YANDEX_MAPS_KEY: "$YA_KEY",
+            SUPABASE_URL: "$SB_URL",
+            SUPABASE_ANON_KEY: "$SB_KEY",
+          };
+          EOF
+            echo "config.js overridden from secrets"
+          else
+            echo "no secrets set — using config.js from repo"
+          fi
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: frontend
+
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
